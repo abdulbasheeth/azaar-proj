@@ -1,5 +1,6 @@
 // Home.jsx
 import React, { useState, useEffect, Suspense, lazy } from "react";
+import { getHomeData } from "../../api";
 import { motion } from "framer-motion";
 import { Shield, ArrowRight } from "lucide-react";
 
@@ -14,6 +15,23 @@ import homeimg5 from "../../assets/homeimg5.jpg";
 const GearModel3D = lazy(() => import("../Ui/GearModel3D"));
 
 const Home = () => {
+
+// API data state
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Fetch backend data on mount
+  useEffect(() => {
+    getHomeData()
+      .then((res) => setData(res))
+      .catch((err) => console.error(err))
+      .finally(() => setLoading(false));
+  }, []);
+
+
+
+
+
   const images = [homeimg1, homeimg2, homeimg3, homeimg4, homeimg5];
   const [currentImage, setCurrentImage] = useState(0);
 
@@ -22,6 +40,11 @@ const Home = () => {
     const interval = setInterval(() => {
       setCurrentImage((prev) => (prev + 1) % images.length);
     }, 4000);
+
+
+
+
+    
     return () => clearInterval(interval);
   }, [images.length]);
 
@@ -31,6 +54,10 @@ const Home = () => {
     if (element) element.scrollIntoView({ behavior: "smooth" });
   };
 
+
+
+
+  if (loading) return <p className="text-white">Loading home data...</p>;
   return (
     <div className="relative w-full h-screen" id="Home">
       {/* Background slideshow */}

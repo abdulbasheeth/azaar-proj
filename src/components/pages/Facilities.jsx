@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import facilityLaser from "../../assets/facility-Laser.jpg";
+import Laser from "../../assets/facility-Laser.jpg";
 import facilityCnc from "../../assets/facility-cnc.jpg";
 import facilityQuality from "../../assets/facility-quality.jpg";
 import facilityProduction from "../../assets/facility-production.jpg";
@@ -10,7 +10,7 @@ const facilities = [
         title: "Laser Cutting Center",
         description: "Precision fiber laser technology for complex cuts",
         specs: ["3000W Fiber Laser", "Up to 20mm thickness", "Auto loading system"],
-        image: facilityLaser,
+        image: Laser,
         span: "lg:col-span-2 lg:row-span-2",
     },
     {

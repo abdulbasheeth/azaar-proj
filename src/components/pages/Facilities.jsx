@@ -1,6 +1,6 @@
 import React, { useRef } from "react";
 import { motion, useInView } from "framer-motion";
-import facilityLaser from '../../assets/facility-Laser.jpg';
+import facilityLaser from "../../assets/facility-laser.jpg";
 import facilityCnc from "../../assets/facility-cnc.jpg";
 import facilityQuality from "../../assets/facility-quality.jpg";
 import facilityProduction from "../../assets/facility-production.jpg";

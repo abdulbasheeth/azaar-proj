@@ -3,6 +3,7 @@ import { motion, useInView } from "framer-motion";
 import { MapPin, Phone, Mail, Send, Clock } from "lucide-react";
 import { useToast } from "../Ui/use-toast";
 
+
 const contactInfo = [
   {
     icon: MapPin,
@@ -109,11 +110,11 @@ Message: ${formData.message}`;
 
   return (
     <section
-      id="Contact"
+      id="contacts"
       className="relative py-20 lg:py-28 bg-gray-900 text-white overflow-hidden"
     >
       {/* Ambient Glow */}
-      <div className="absolute -top-60 left-1/2 w-[700px] h-[700px] bg-blue-600/20 blur-[200px] rounded-full -translate-x-1/2" />
+      <div  className="absolute -top-60 left-1/2 w-[700px] h-[700px] bg-blue-600/20 blur-[200px] rounded-full -translate-x-1/2" />
 
       <div className="container mx-auto px-4 relative">
         {/* Header */}

@@ -1,9 +1,9 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { useLocation, Link } from "react-router-dom";
 import { motion, AnimatePresence } from "framer-motion";
 import { X, Filter } from "lucide-react";
-import { Button } from "./button";
-import { useLocation } from "react-router-dom";
+import { Button } from "../Ui/button";
+
 
 import Navbar from "../Layout/Navbar";
 
@@ -137,7 +137,7 @@ const categoryColors = {
     Accessories: "bg-secondary text-secondary-foreground border-secondary",
 };
 
-const ProductGallery = () => {
+const Product = () => {
     const [activeCategory, setActiveCategory] = useState("All");
     const [selectedProduct, setSelectedProduct] = useState(null);
 
@@ -153,8 +153,8 @@ const ProductGallery = () => {
     // Scroll to top of gallery if navigated from "View Full Gallery"
 
     useEffect(() => {
-        if (location.state?.scrollToGallery) {
-            const element = document.getElementById("ProductGalleryHero");
+        if (location.state?.scrollToproduct) {
+            const element = document.getElementById("product");
             if (element) {
                 const yOffset = -80; // adjust for sticky navbar
                 const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
@@ -165,6 +165,7 @@ const ProductGallery = () => {
         }
     }, [location]);
 
+   
 
 
     return (
@@ -172,7 +173,7 @@ const ProductGallery = () => {
             <Navbar />
 
             {/* Hero Section with Animated Background */}
-            <section id="ProductGalleryHero" className="pt-28 pb-16 bg-gradient-to-b bg-[#DEEBF7] from-primary/5 to-background relative overflow-hidden">
+            <section id="product" className="pt-28 pb-16 bg-gradient-to-b bg-[#DEEBF7] from-primary/5 to-background relative overflow-hidden">
                 {/* Industrial Manufacturing Background */}
                 <div className="absolute inset-0 pointer-events-none overflow-hidden">
                     {/* Rotating Gear System */}
@@ -291,6 +292,7 @@ const ProductGallery = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.6 }}
                         className="text-center max-w-3xl mx-auto"
+
                     >
                         <span className="inline p-2 rounded-2xl text-[#1484F4] px-5 bg-[#D8E1EA]">
                             Product Gallery
@@ -302,9 +304,13 @@ const ProductGallery = () => {
                             Explore our complete range of solar mounting structures, cable management systems,
                             and electrical enclosures manufactured to international quality standards.
                         </p>
-                        <a size="lg" className="bg-[#0D3773] text-white px-4 py-2 rounded-lg hover:bg-[#09295a] transition-colors duration-300">
+
+                        <Link to="/Contact" className="bg-[#0D3773] text-white px-4 py-2 rounded-lg hover:bg-[#09295a] transition-colors duration-300">
                             Request Quote
-                        </a>
+                        </Link>
+
+
+
 
                     </motion.div>
                 </div>
@@ -362,7 +368,11 @@ const ProductGallery = () => {
                                     className="group bg-card rounded-2xl overflow-hidden shadow-industrial hover:shadow-industrial-lg transition-all duration-300 
            border  cursor-pointer border-gray-300 hover:border-blue-300"
 
-                                    onClick={() => setSelectedProduct(product)}
+                                    onClick={() => {
+                                        setSelectedProduct(product);
+                                        window.scrollTo({ top: 0, behavior: "smooth" }); // scroll to top when clicked
+                                    }}
+
                                 >
                                     {/* Image Container */}
                                     <div className="relative aspect-[4/3] overflow-hidden bg-muted">
@@ -445,11 +455,7 @@ const ProductGallery = () => {
                                         {selectedProduct.description}
                                     </p>
                                     <div className="flex gap-3">
-                                        <Link to="/#contact" onClick={() => setSelectedProduct(null)}>
-                                            <Button className="accent-gradient text-primary-foreground">
-                                                Request Quote
-                                            </Button>
-                                        </Link>
+
                                         <Button variant="outline" onClick={() => setSelectedProduct(null)}>
                                             Close
                                         </Button>
@@ -466,4 +472,4 @@ const ProductGallery = () => {
     );
 };
 
-export default ProductGallery;
+export default Product;

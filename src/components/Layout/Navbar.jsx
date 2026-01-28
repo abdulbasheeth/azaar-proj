@@ -1,7 +1,7 @@
 import React from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
 import logo from "../../assets/Mechatron.png";
-import { Phone } from "lucide-react";
+
 
 const Navbar = () => {
     const navigate = useNavigate();
@@ -65,19 +65,18 @@ const Navbar = () => {
                         >
                             Facilities
                         </button>
-                    </li> 
+                    </li>
 
-                    <button
-                        onClick={() => handleScroll("Products", "/")}
-                        className="relative hover:text-[#0D3773] ..."
-                    >
-                        Products
-                    </button>
+
+                    <Link to="/product">
+                        <button className="relative hover:text-[#0D3773] ...">
+                            Products
+                        </button>
+                    </Link>
+
                     <li>
-
-
                         <button
-                            onClick={() => handleScroll("Contact", "/")}
+                            onClick={() => handleScroll("contacts", "/")}
                             className="relative hover:text-[#0D3773] transition-colors duration-300 after:block after:absolute after:left-0 after:-bottom-1 after:w-0 after:h-[2px] after:bg-[#0D3773] hover:after:w-full after:transition-all after:duration-300"
                         >
                             Contact
@@ -86,15 +85,16 @@ const Navbar = () => {
                 </ul>
 
                 {/* Contact Button */}
-                <div className="flex items-center gap-4">
-                    <Phone size={27} className="text-[#0D3773]" />
-                    <button
-                        onClick={() => handleScroll("Contact", "/")}
-                        className="bg-[#0D3773] text-white px-4 py-2 rounded-lg hover:bg-[#09295a] transition-colors duration-300"
-                    >
-                        Get Quote
-                    </button>
-                </div>
+              
+
+                        <button
+                            onClick={() => handleScroll("contacts", "/")}
+                            className="bg-[#0D3773] text-white px-4 py-2 rounded-lg hover:bg-[#09295a] transition-colors duration-300"
+                        >
+                            Get Quote
+                        </button>
+               
+
             </div>
         </nav >
     );

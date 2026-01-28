@@ -1,43 +1,48 @@
-import React from 'react';
-import { Routes, Route } from 'react-router-dom';
-import Navbar from './components/Layout/Navbar';
-import Home from './components/pages/Home';
-import About from './components/pages/About';
-import Service from './components/pages/Services';
-import Facilities from './components/pages/Facilities';
-import Products from './components/pages/Products'; // homepage preview
-import Quality from './components/pages/Quality';
-import Contact from "./components/pages/Contact"
-import ProductGallery from "./components/Ui/ProductGallery" // full gallery page
-import Footer from "./components/Layout/Footer"
+import React from "react";
+
+import ScrollToTop from "./components/Ui/ScrollToTop"
+import { Routes, Route } from "react-router-dom";
+
+import Navbar from "./components/Layout/Navbar";
+import Footer from "./components/Layout/Footer";
 import WhatsAppFloat from "./components/Ui/WhatsappFloat";
 
+import Home from "./components/pages/Home";
+import About from "./components/pages/About";
+import Service from "./components/pages/Services";
+import Facilities from "./components/pages/Facilities";
+import Product from "./components/pages/Product";
+import Contact from "./components/pages/Contact";
 
 function App() {
+
   return (
-    <div>
+    <>
+     <ScrollToTop />
       <Navbar />
 
       <Routes>
-        {/* Homepage with preview Products section */}
-        <Route path="/" element={
-          <>
-            <Home />
-            <About />
-            <Service />
-            <Facilities />
-            <Products /> {/* preview section */}
-            <Quality />
-            <Contact />
-          </>
-        }/>
+        {/* Home page */}
+        <Route
+          path="/"
+          element={
+            <>
+              <Home />
+              <About />
+              <Service />
+              <Facilities />
+              <Contact />
+            </>
+          }
+        />
 
-        
-        <Route path="/Products" element={<ProductGallery />} />
+        {/* Product page */}
+        <Route path="/product" element={<Product />} />
       </Routes>
-     <Footer />
+
+      <Footer />
       <WhatsAppFloat />
-    </div>
+    </>
   );
 }
 

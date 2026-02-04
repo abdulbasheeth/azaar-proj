@@ -9,20 +9,20 @@ const contactInfo = [
     icon: MapPin,
     title: "Address",
     details: [
-      "No. 45, Industrial Estate",
-      "Ambattur, Chennai - 600058",
-      "Tamil Nadu, India",
+      "No.11,Pillaiyar Kovil Street",
+      "Ambattur Industrial Estate",
+      "Ambattur,Chennai - 600098",
     ],
   },
   {
     icon: Phone,
     title: "Phone",
-    details: ["+91 44262 51234", "+91 98765 43210"],
+    details: ["+91 97917 79905", "+91 96290 40496"],
   },
   {
     icon: Mail,
     title: "Email",
-    details: ["info@themechatron.com", "sales@themechatron.com"],
+    details: ["info@mrmekaniq.com", "mr.mekaniq1@gmail.com"],
   },
   {
     icon: Clock,
@@ -110,8 +110,9 @@ Message: ${formData.message}`;
 
   return (
     <section
-      id="contacts"
-      className="relative py-20 lg:py-28 bg-gray-900 text-white overflow-hidden"
+      id="Contact"
+      
+      className="relative py-20 lg:py-28  bg-gray-900 text-white overflow-hidden"
     >
       {/* Ambient Glow */}
       <div  className="absolute -top-60 left-1/2 w-[700px] h-[700px] bg-blue-600/20 blur-[200px] rounded-full -translate-x-1/2" />
@@ -125,7 +126,7 @@ Message: ${formData.message}`;
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16 lg:mb-20"
         >
-          <span className="inline-block mb-5 px-5 py-2 text-lh rounded-full bg-white/10 text-blue-500">
+          <span className="inline-block mb-5 px-5 py-2 text-lh rounded-full font-serif bg-white/10 text-blue-500">
             Contact Us
           </span>
 

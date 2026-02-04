@@ -29,8 +29,14 @@ function Gear({ position = [0, 0, 0], scale = 1, speed = 1, color = "#60a5fa", r
 
     if (i === 0) shape.moveTo(Math.cos(angle) * outerRadius, Math.sin(angle) * outerRadius);
 
-    shape.lineTo(Math.cos(toothStart) * (outerRadius + toothHeight), Math.sin(toothStart) * (outerRadius + toothHeight));
-    shape.lineTo(Math.cos(toothEnd) * (outerRadius + toothHeight), Math.sin(toothEnd) * (outerRadius + toothHeight));
+    shape.lineTo(
+      Math.cos(toothStart) * (outerRadius + toothHeight),
+      Math.sin(toothStart) * (outerRadius + toothHeight)
+    );
+    shape.lineTo(
+      Math.cos(toothEnd) * (outerRadius + toothHeight),
+      Math.sin(toothEnd) * (outerRadius + toothHeight)
+    );
     shape.lineTo(Math.cos(gapEnd) * outerRadius, Math.sin(gapEnd) * outerRadius);
   }
   shape.closePath();
@@ -40,7 +46,14 @@ function Gear({ position = [0, 0, 0], scale = 1, speed = 1, color = "#60a5fa", r
   hole.absarc(0, 0, innerRadius, 0, Math.PI * 2, true);
   shape.holes.push(hole);
 
-  const extrudeSettings = { depth: thickness, bevelEnabled: true, bevelThickness: 0.05, bevelSize: 0.05, bevelOffset: 0, bevelSegments: 3 };
+  const extrudeSettings = {
+    depth: thickness,
+    bevelEnabled: true,
+    bevelThickness: 0.05,
+    bevelSize: 0.05,
+    bevelOffset: 0,
+    bevelSegments: 3,
+  };
 
   return (
     <mesh ref={meshRef} position={position} scale={scale}>
@@ -55,7 +68,9 @@ function Gear({ position = [0, 0, 0], scale = 1, speed = 1, color = "#60a5fa", r
 // ---------------------------
 function Sprocket({ position = [0, 0, 0], scale = 1, speed = 0.5, color = "#3b82f6" }) {
   const meshRef = useRef(null);
-  useFrame((state, delta) => { if (meshRef.current) meshRef.current.rotation.z += delta * speed; });
+  useFrame((state, delta) => {
+    if (meshRef.current) meshRef.current.rotation.z += delta * speed;
+  });
 
   return (
     <group ref={meshRef} position={position} scale={scale}>
@@ -82,22 +97,32 @@ function Sprocket({ position = [0, 0, 0], scale = 1, speed = 0.5, color = "#3b82
 // ---------------------------
 function TechRing({ radius = 2, thickness = 0.02, speed = 0.3 }) {
   const meshRef = useRef(null);
-  useFrame((state, delta) => { if (meshRef.current) meshRef.current.rotation.z -= delta * speed; });
+  useFrame((state, delta) => {
+    if (meshRef.current) meshRef.current.rotation.z -= delta * speed;
+  });
 
   return (
     <mesh ref={meshRef}>
       <torusGeometry args={[radius, thickness, 8, 64]} />
-      <meshStandardMaterial color="#60a5fa" metalness={0.8} roughness={0.3} emissive="#3b82f6" emissiveIntensity={0.3} />
+      <meshStandardMaterial
+        color="#60a5fa"
+        metalness={0.8}
+        roughness={0.3}
+        emissive="#3b82f6"
+        emissiveIntensity={0.3}
+      />
     </mesh>
   );
 }
 
 // ---------------------------
-// FloatingBolt component
+// FloatingBolt component (kept in code but not used in scene)
 // ---------------------------
 function FloatingBolt({ position = [0, 0, 0] }) {
   const groupRef = useRef(null);
-  useFrame((state) => { if (groupRef.current) groupRef.current.rotation.y = state.clock.elapsedTime * 0.5; });
+  useFrame((state) => {
+    if (groupRef.current) groupRef.current.rotation.y = state.clock.elapsedTime * 0.5;
+  });
 
   return (
     <Float speed={2} rotationIntensity={0.5} floatIntensity={0.5}>
@@ -143,8 +168,7 @@ function Scene() {
       <TechRing radius={2.2} thickness={0.015} speed={0.2} />
       <TechRing radius={2.5} thickness={0.01} speed={-0.15} />
 
-      <FloatingBolt position={[2, -0.5, 0.5]} />
-      <FloatingBolt position={[-1.8, 1.2, 0.3]} />
+      {/* FloatingBolt components removed */}
     </>
   );
 }
@@ -155,7 +179,11 @@ function Scene() {
 const GearModel3D = () => {
   return (
     <div className="w-full h-full">
-      <Canvas camera={{ position: [0, 0, 5], fov: 45 }} gl={{ antialias: true, alpha: true }} style={{ background: "transparent" }}>
+      <Canvas
+        camera={{ position: [0, 0, 5], fov: 45 }}
+        gl={{ antialias: true, alpha: true }}
+        style={{ background: "transparent" }}
+      >
         <Suspense fallback={null}>
           <Scene />
         </Suspense>

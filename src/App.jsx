@@ -1,8 +1,7 @@
 import React from "react";
+import { Routes, Route, Navigate } from "react-router-dom";
 
-import ScrollToTop from "./components/Ui/ScrollToTop"
-import { Routes, Route } from "react-router-dom";
-
+import ScrollToTop from "./components/Ui/ScrollToTop";
 import Navbar from "./components/Layout/Navbar";
 import Footer from "./components/Layout/Footer";
 import WhatsAppFloat from "./components/Ui/WhatsappFloat";
@@ -15,29 +14,45 @@ import Product from "./components/pages/Product";
 import Contact from "./components/pages/Contact";
 
 function App() {
-
   return (
     <>
-     <ScrollToTop />
+      <ScrollToTop />
       <Navbar />
 
       <Routes>
-        {/* Home page */}
+        {/* Home page with all sections stacked */}
         <Route
           path="/"
           element={
-            <>
-              <Home />
-              <About />
-              <Service />
-              <Facilities />
-              <Contact />
-            </>
+            <div className="w-full overflow-hidden">
+              <section id="Home" className="min-h-screen">
+                <Home />
+              </section>
+
+              <section id="About" className="min-h-screen">
+                <About />
+              </section>
+
+              <section id="Services" className="min-h-screen">
+                <Service />
+              </section>
+
+              <section id="Facilities" className="min-h-screen">
+                <Facilities />
+              </section>
+
+              <section id="Contact" className="min-h-screen">
+                <Contact />
+              </section>
+            </div>
           }
         />
 
         {/* Product page */}
-        <Route path="/product" element={<Product />} />
+        <Route path="/products" element={<Product />} />
+
+        {/* Redirect unknown paths to Home */}
+        <Route path="*" element={<Navigate to="/" />} />
       </Routes>
 
       <Footer />

@@ -236,7 +236,7 @@ const Quality = () => {
                     transition={{ duration: 0.6 }}
                     className="text-center max-w-3xl mx-auto mb-16"
                 >
-                    <span className="inline-block px-5 text-white bg-[#0F355B] py-1.5 rounded-full bg-industrial-blue/20 backdrop-blur-sm text-industrial-glow text-sm font-medium mb-4">
+                    <span className="inline-block px-5 font-serif text-white bg-[#0F355B] py-1.5 rounded-full bg-industrial-blue/20 backdrop-blur-sm text-industrial-glow text-sm font-medium mb-4">
                         Quality Policy
                     </span>
                     <h2 className="text-3xl md:text-4xl lg:text-5xl mt-5 font-display font-bold mb-6 text-white">

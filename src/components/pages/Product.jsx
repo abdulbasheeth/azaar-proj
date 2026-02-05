@@ -4,7 +4,6 @@ import { motion, AnimatePresence } from "framer-motion";
 import { X, Filter } from "lucide-react";
 import { Button } from "../Ui/button";
 import Navbar from "../Layout/Navbar";
-import axios from "axios";
 
 // Import local product images
 import rooftopStandard from "../../assets/product-rooftop-standard.jpg";
@@ -20,75 +19,110 @@ import walkway from "../../assets/product-walkway.jpg";
 import clamps from "../../assets/product-clamps.jpg";
 import accessories from "../../assets/product-accessories.jpg";
 
-// Default products (fallback)
-const defaultProducts = [
-  { id: "rooftop-standard", title: "Roof Top Structure - Standard", description: "Pre-engineered mounting structures for standard rooftop solar installations with optimal tilt angles.", category: "Solar Structures", image: rooftopStandard },
-  { id: "rooftop-elevated", title: "Roof Top Structure - Elevated", description: "Elevated mounting systems for optimal panel angle and maintenance access on flat roofs.", category: "Solar Structures", image: rooftopElevated },
-  { id: "rooftop-customized", title: "Roof Top Structure - Customized", description: "Bespoke rooftop solutions designed for unique architectural requirements and complex roof profiles.", category: "Solar Structures", image: rooftopStructure },
-  { id: "ground-mount", title: "Ground Mount Structure", description: "Heavy-duty ground mounting systems for solar farms and open field installations.", category: "Solar Structures", image: groundMount },
-  { id: "carport", title: "Car Port Structure", description: "Solar carport structures combining parking shade with renewable energy generation.", category: "Solar Structures", image: carport },
-  { id: "inverter-stand", title: "Inverter Mounting Stand", description: "Sturdy galvanized steel mounting stands for inverters with proper ventilation design.", category: "Solar Structures", image: inverterStand },
-  { id: "cable-perforated", title: "Cable Tray - Perforated", description: "Perforated cable trays for industrial cable management with excellent ventilation.", category: "Cable Management", image: cablePerforated },
-  { id: "cable-ladder", title: "Cable Tray - Ladder Type", description: "Heavy-duty ladder-type cable trays for high-capacity cable routing applications.", category: "Cable Management", image: cableLadder },
-  { id: "panel-box", title: "Control Panel Box", description: "Custom electrical enclosures with IP55/IP65 protection ratings for harsh environments.", category: "Electrical", image: panelBox },
-  { id: "walkway", title: "Metal Roof Walkway", description: "Safe walkway systems with anti-slip grating for maintenance access on metal rooftops.", category: "Accessories", image: walkway },
-  { id: "clamps", title: "Solar Mounting Clamps", description: "Precision-engineered aluminum and stainless steel clamps for secure solar panel mounting.", category: "Accessories", image: clamps },
-  { id: "accessories", title: "Accessories & Fasteners", description: "Complete range of SS/GI fasteners, L-brackets, washers, and mounting hardware.", category: "Accessories", image: accessories },
+// Product data with full descriptions and categories
+const products = [
+  { 
+    id: "rooftop-standard", 
+    title: "Roof Top Structure - Standard", 
+    description: "Our pre-engineered standard rooftop mounting structures are designed for efficient solar installations with optimal tilt angles. Made from high-grade galvanized steel with corrosion-resistant coating, these structures ensure long-term durability and stability. Features include easy installation, adjustable tilt angles from 10° to 30°, and compatibility with all major solar panel brands. Perfect for residential and commercial applications with standard roof types including RCC, metal sheets, and asbestos.", 
+    category: "Solar Structures",
+    image: rooftopStandard 
+  },
+  { 
+    id: "rooftop-elevated", 
+    title: "Roof Top Structure - Elevated", 
+    description: "Elevated mounting systems specifically designed for flat roofs to achieve optimal panel orientation and maximum energy generation. These structures provide sufficient clearance for maintenance access and improved air circulation beneath panels. Constructed from hot-dip galvanized steel with powder coating for enhanced weather resistance. The modular design allows for easy expansion and accommodates various load capacities. Ideal for commercial buildings, factories, and institutions with flat roof surfaces.", 
+    category: "Solar Structures",
+    image: rooftopElevated 
+  },
+  { 
+    id: "rooftop-customized", 
+    title: "Roof Top Structure - Customized", 
+    description: "Bespoke rooftop solutions engineered for unique architectural requirements and complex roof profiles. Our custom design team works with clients to create structures that accommodate challenging roof shapes, limited space, and specific load requirements. Each customized solution undergoes structural analysis and wind load testing to ensure safety and compliance with local building codes. Perfect for heritage buildings, architectural landmarks, and industrial facilities with non-standard roof configurations.", 
+    category: "Solar Structures",
+    image: rooftopStructure 
+  },
+  { 
+    id: "ground-mount", 
+    title: "Ground Mount Structure", 
+    description: "Heavy-duty ground mounting systems engineered for solar farms and open field installations. These robust structures feature deep foundation options including concrete piers, helical piles, and ground screws suitable for various soil conditions. The adjustable tilt and azimuth mechanisms allow for seasonal optimization of solar panel orientation. Designed to withstand extreme weather conditions with wind speeds up to 150 km/h. Complete with anti-corrosion treatment and available in fixed, seasonal adjustable, and tracking configurations.", 
+    category: "Solar Structures",
+    image: groundMount 
+  },
+  { 
+    id: "carport", 
+    title: "Car Port Structure", 
+    description: "Dual-purpose solar carport structures that combine covered parking with renewable energy generation. These innovative structures feature sleek designs with integrated solar panels that provide shade for vehicles while producing clean electricity. Made from structural steel with powder coating in various colors to match building aesthetics. Includes integrated drainage systems, lighting options, and EV charging station compatibility. Ideal for corporate campuses, shopping malls, residential complexes, and public parking facilities seeking sustainable infrastructure solutions.", 
+    category: "Solar Structures",
+    image: carport 
+  },
+  { 
+    id: "inverter-stand", 
+    title: "Inverter Mounting Stand", 
+    description: "Sturdy galvanized steel mounting stands specifically designed for solar inverters and electrical equipment. These stands provide proper ventilation clearance, cable management provisions, and protection from ground-level moisture. Features include adjustable height options, locking mechanisms for security, and pre-drilled holes for easy installation. Suitable for both indoor and outdoor applications with optional weatherproof enclosures. Compatible with all major inverter brands and available in single and multi-inverter configurations for system scalability.", 
+    category: "Electrical",
+    image: inverterStand 
+  },
+  { 
+    id: "cable-perforated", 
+    title: "Cable Tray - Perforated", 
+    description: "High-quality perforated cable trays designed for organized industrial cable management with excellent ventilation and heat dissipation. Manufactured from pre-galvanized steel with additional powder coating for superior corrosion resistance. The perforated design allows for better air circulation, reducing cable temperature and extending cable life. Features include smooth edges for safe cable installation, high load-bearing capacity, and easy cutting for custom lengths. Available in various widths, depths, and finishes to suit different installation requirements and aesthetic preferences.", 
+    category: "Cable Management",
+    image: cablePerforated 
+  },
+  { 
+    id: "cable-ladder", 
+    title: "Cable Tray - Ladder Type", 
+    description: "Heavy-duty ladder-type cable trays engineered for high-capacity power and data cable routing in industrial applications. Constructed from hot-dip galvanized steel with welded rungs for maximum strength and durability. The open design provides excellent cable visibility, ventilation, and accessibility for maintenance. Features include integrated grounding provisions, fire-resistant properties, and compatibility with various accessories like covers, dividers, and mounting brackets. Ideal for data centers, power plants, manufacturing facilities, and commercial buildings requiring robust cable management solutions.", 
+    category: "Cable Management",
+    image: cableLadder 
+  },
+  { 
+    id: "panel-box", 
+    title: "Control Panel Box", 
+    description: "Custom electrical enclosures and control panel boxes manufactured with IP55/IP65 protection ratings for harsh industrial environments. These robust enclosures feature stainless steel or powder-coated mild steel construction with silicone gaskets for complete dust and water ingress protection. Includes transparent covers for meter visibility, internal mounting plates, cable gland provisions, and lockable doors for security. Available in wall-mounted, floor-standing, and pole-mounted configurations with custom cutouts and branding options. Suitable for solar combiner boxes, distribution panels, and automation control systems.", 
+    category: "Electrical",
+    image: panelBox 
+  },
+  { 
+    id: "walkway", 
+    title: "Metal Roof Walkway", 
+    description: "Safety walkway systems with anti-slip grating specifically designed for maintenance access on metal rooftops with solar installations. These walkways provide safe passage for technicians while protecting the roof surface from damage. Constructed from galvanized steel or aluminum with serrated grating surfaces that provide traction even in wet conditions. Features include easy bolt-on installation, adjustable support legs, and compatibility with various roof profiles. Includes handrail options and transition plates for connecting multiple roof sections. Essential for large commercial and industrial solar installations requiring regular maintenance access.", 
+    category: "Accessories",
+    image: walkway 
+  },
+  { 
+    id: "clamps", 
+    title: "Solar Mounting Clamps", 
+    description: "Precision-engineered aluminum and stainless steel clamps for secure solar panel mounting on all types of structures. Our comprehensive range includes mid clamps, end clams, corner clamps, and specialized clamps for frameless panels. Manufactured from high-grade aluminum alloy 6005-T5 with anodized finish or stainless steel 304/316 for coastal applications. Features include integrated rubber padding to prevent panel damage, self-locking mechanisms, and compatibility with various rail systems. Each clamp undergoes rigorous testing for pull-out strength, wind load resistance, and long-term durability in extreme weather conditions.", 
+    category: "Accessories",
+    image: clamps 
+  },
+  { 
+    id: "accessories", 
+    title: "Accessories & Fasteners", 
+    description: "Complete range of high-quality accessories and fasteners for solar mounting systems including stainless steel and galvanized iron bolts, nuts, washers, L-brackets, U-brackets, and specialized mounting hardware. All fasteners are manufactured to international standards with proper grading and certification. Features include self-locking nuts, spring washers for vibration resistance, and various head types (hex, countersunk, pan) for different applications. Available in metric and imperial sizes with bulk packaging options. Includes grounding lugs, cable ties, marking labels, and other installation essentials for complete solar project solutions.", 
+    category: "Accessories",
+    image: accessories 
+  },
 ];
 
 const categories = ["All", "Solar Structures", "Cable Management", "Electrical", "Accessories"];
-const categoryColors = {
-  "Solar Structures": "bg-primary/10 text-primary border-primary/20",
-  "Cable Management": "bg-accent/10 text-accent-foreground border-accent/20",
-  Electrical: "bg-destructive/10 text-destructive border-destructive/20",
-  Accessories: "bg-secondary text-secondary-foreground border-secondary",
-};
 
 const Product = () => {
   const navigate = useNavigate();
   const location = useLocation();
   const [activeCategory, setActiveCategory] = useState("All");
   const [selectedProduct, setSelectedProduct] = useState(null);
-  const [products, setProducts] = useState(defaultProducts);
-  const [isLoading, setIsLoading] = useState(true);
 
-  // Fetch products from backend
-  const fetchProducts = async () => {
-    try {
-      const res = await axios.get("/api/products"); // your backend route
-      const backendProducts = res.data.map((p) => ({
-        id: p._id,
-        title: p.title,
-        description: p.description,
-        category: p.category,
-        image: p.image ? `/uploads/${p.image}` : rooftopStandard, // fallback
-      }));
-
-      // Merge backend products with default ones
-      const mergedProducts = [...defaultProducts];
-      backendProducts.forEach((bp) => {
-        if (!mergedProducts.some((p) => p.id === bp.id)) mergedProducts.push(bp);
-      });
-      setProducts(mergedProducts);
-    } catch (err) {
-      console.error("Failed to fetch products:", err);
-      setProducts(defaultProducts);
-    } finally {
-      setIsLoading(false);
-    }
-  };
-
-  useEffect(() => {
-    fetchProducts();
-
-    // Listen for admin updates
-    const handleProductsUpdated = () => fetchProducts();
-    window.addEventListener("productsUpdated", handleProductsUpdated);
-    return () => window.removeEventListener("productsUpdated", handleProductsUpdated);
-  }, []);
-
-  const filteredProducts = activeCategory === "All" ? products : products.filter((p) => p.category === activeCategory);
-  const getProductCountByCategory = (category) => (category === "All" ? products.length : products.filter((p) => p.category === category).length);
+  const filteredProducts = activeCategory === "All" 
+    ? products 
+    : products.filter((p) => p.category === activeCategory);
+  
+  const getProductCountByCategory = (category) => 
+    category === "All" 
+      ? products.length 
+      : products.filter((p) => p.category === category).length;
 
   // Scroll helpers
   const scrollToSection = (id) => {
@@ -111,26 +145,12 @@ const Product = () => {
     }
   }, [location]);
 
-  if (isLoading) {
-    return (
-      <div className="min-h-screen bg-[#F0F4F7]">
-        <Navbar />
-        <div className="pt-28 flex items-center justify-center">
-          <div className="text-center">
-            <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-primary mx-auto"></div>
-            <p className="mt-4 text-gray-600">Loading products...</p>
-          </div>
-        </div>
-      </div>
-    );
-  }
-
   return (
     <div className="min-h-screen bg-[#F0F4F7]">
       <Navbar />
 
       {/* Hero Section */}
-      <section id="products" className="pt-28 pb-16 bg-blue-200 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
+      <section id="products" className="pt-28 pb-16 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[...Array(4)].map((_, i) => (
             <motion.div
@@ -155,37 +175,60 @@ const Product = () => {
               </svg>
             </motion.div>
           ))}
-          <motion.div animate={{ y: [0, -30, 0], x: [0, 15, 0] }} transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} className="absolute top-10 left-[5%] w-80 h-80 rounded-full blur-3xl" style={{ backgroundColor: "#004D99", opacity: 0.1 }} />
-          <motion.div animate={{ y: [0, 25, 0], x: [0, -20, 0] }} transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }} className="absolute top-20 right-[10%] w-96 h-96 rounded-full blur-3xl" style={{ backgroundColor: "#004D99", opacity: 0.1 }} />
+          <motion.div 
+            animate={{ y: [0, -30, 0], x: [0, 15, 0] }} 
+            transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }} 
+            className="absolute top-10 left-[5%] w-80 h-80 rounded-full blur-3xl" 
+            style={{ backgroundColor: "#004D99", opacity: 0.1 }} 
+          />
+          <motion.div 
+            animate={{ y: [0, 25, 0], x: [0, -20, 0] }} 
+            transition={{ duration: 12, repeat: Infinity, ease: "easeInOut", delay: 2 }} 
+            className="absolute top-20 right-[10%] w-96 h-96 rounded-full blur-3xl" 
+            style={{ backgroundColor: "#004D99", opacity: 0.1 }} 
+          />
         </div>
 
         <div className="container mx-auto px-4 relative z-10 text-center max-w-3xl">
-          <span className="inline p-2 rounded-3xl text-[#1484F4] px-5 bg-[#D8E1EA] font-serif text-2xl">Product Gallery</span>
+          <span className="inline p-2 rounded-3xl text-[#1484F4] px-5 bg-[#D8E1EA] font-serif text-2xl">
+            Product Gallery
+          </span>
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-display font-bold text-foreground mb-6 mt-5">
-            Our <span className="text-primary text-[#004D99]">Products</span>
+            Our <span className="text-[#004D99]">Products</span>
           </h1>
           <p className="text-lg text-gray-500 mb-8">
             Explore our complete range of solar mounting structures, cable management systems, and electrical enclosures manufactured to international quality standards.
           </p>
-          <button onClick={() => scrollToSection("Contact")}>
-            <span className="bg-[#0D3773] text-white px-4 py-2 rounded-lg hover:bg-[#09295a] transition-colors duration-300">Request Quote</span>
+          <button 
+            onClick={() => scrollToSection("Contact")}
+            className="bg-[#0D3773] text-white px-6 py-3 rounded-lg hover:bg-[#09295a] transition-colors duration-300"
+          >
+            Request Quote
           </button>
         </div>
       </section>
 
       {/* Filter Section */}
-      <section className="py-8 text-gray-500 bg-background/95 backdrop-blur-sm z-40">
+      <section className="py-8 text-gray-500 bg-background/95 top-0 z-40">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-3 overflow-x-auto pb-2 scrollbar-hide mt-10">
+          <div className="flex items-center gap-3 overflow-x-auto pb-8 scrollbar-hide mt-10">
             <Filter className="w-5 h-5 text-muted-foreground flex-shrink-0" />
             {categories.map(category => (
               <button
                 key={category}
                 onClick={() => setActiveCategory(category)}
-                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap border-b-2 ${activeCategory === category ? "border-blue-300 bg-[#004D99] text-white" : "border-transparent text-muted-foreground hover:border-blue-200"}`}
+                className={`px-4 py-2 rounded-full text-sm font-medium transition-all duration-300 whitespace-nowrap ${
+                  activeCategory === category 
+                    ? "bg-[#004D99] text-white shadow-md" 
+                    : "text-muted-foreground hover:bg-gray-100"
+                }`}
               >
                 {category}
-                {category !== "All" && <span className="ml-1.5 opacity-70">({getProductCountByCategory(category)})</span>}
+                {category !== "All" && (
+                  <span className="ml-1.5 opacity-70">
+                    ({getProductCountByCategory(category)})
+                  </span>
+                )}
               </button>
             ))}
           </div>
@@ -205,22 +248,39 @@ const Product = () => {
                   animate={{ opacity: 1, scale: 1 }}
                   exit={{ opacity: 0, scale: 0.9 }}
                   transition={{ duration: 0.3, delay: index * 0.05 }}
-                  className="group bg-card rounded-2xl overflow-hidden shadow-industrial hover:shadow-industrial-lg transition-all duration-300 border cursor-pointer border-gray-300 hover:border-blue-300"
-                  onClick={() => { setSelectedProduct(product); window.scrollTo({ top: 0, behavior: "smooth" }); }}
+                  className="group bg-white rounded-2xl overflow-hidden shadow-lg hover:shadow-xl transition-all duration-300 border border-gray-200 hover:border-blue-300 cursor-pointer"
+                  onClick={() => { 
+                    setSelectedProduct(product); 
+                    window.scrollTo({ top: 0, behavior: "smooth" }); 
+                  }}
                 >
-                  <div className="relative aspect-[4/3] overflow-hidden bg-muted">
+                  <div className="relative aspect-[4/3] overflow-hidden">
                     <img
                       src={product.image}
                       alt={product.title}
                       className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                      onError={(e) => { e.target.src = "https://via.placeholder.com/400x300?text=Product+Image"; }}
+                      onError={(e) => { 
+                        e.target.src = "https://via.placeholder.com/400x300?text=Product+Image"; 
+                      }}
                     />
                   </div>
                   <div className="p-5">
-                    <h3 className="font-display font-bold text-foreground mb-2 group-hover:text-blue-600 transition-colors line-clamp-1">{product.title}</h3>
-                    <p className="text-sm text-gray-600 line-clamp-2">{product.description}</p>
+                    <h3 className="font-bold text-lg text-gray-800 mb-2 group-hover:text-blue-600 transition-colors line-clamp-1">
+                      {product.title}
+                    </h3>
+                    <p className="text-sm text-gray-600 mb-3 line-clamp-3">
+                      {product.description}
+                    </p>
                     <div className="mt-3">
-                      <span className={`inline-block text-xs px-2 py-1 rounded-full ${categoryColors[product.category] || 'bg-gray-100 text-gray-800'}`}>
+                      <span className={`inline-block text-xs px-3 py-1 rounded-full ${
+                        product.category === "Solar Structures" 
+                          ? "bg-blue-100 text-blue-800 border border-blue-200" 
+                          : product.category === "Cable Management" 
+                          ? "bg-green-100 text-green-800 border border-green-200"
+                          : product.category === "Electrical" 
+                          ? "bg-red-100 text-red-800 border border-red-200"
+                          : "bg-gray-100 text-gray-800 border border-gray-200"
+                      }`}>
                         {product.category}
                       </span>
                     </div>
@@ -229,27 +289,86 @@ const Product = () => {
               ))}
             </AnimatePresence>
           </motion.div>
-          {filteredProducts.length === 0 && <div className="text-center py-16"><p className="text-muted-foreground">No products found in this category.</p></div>}
+          {filteredProducts.length === 0 && (
+            <div className="text-center py-16">
+              <p className="text-gray-500">No products found in this category.</p>
+            </div>
+          )}
         </div>
       </section>
 
       {/* Lightbox Modal */}
       <AnimatePresence>
         {selectedProduct && (
-          <motion.div initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }} className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90" onClick={() => setSelectedProduct(null)}>
-            <motion.div initial={{ scale: 0.9, opacity: 0 }} animate={{ scale: 1, opacity: 1 }} exit={{ scale: 0.9, opacity: 0 }} transition={{ type: "spring", damping: 25, stiffness: 300 }} className="relative max-w-5xl w-full bg-card rounded-2xl overflow-hidden shadow-2xl" onClick={(e) => e.stopPropagation()}>
-              <button onClick={() => setSelectedProduct(null)} className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors"><X className="w-5 h-5" /></button>
-              <div className="grid md:grid-cols-2 border-none">
+          <motion.div 
+            initial={{ opacity: 0 }} 
+            animate={{ opacity: 1 }} 
+            exit={{ opacity: 0 }} 
+            className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/90"
+            onClick={() => setSelectedProduct(null)}
+          >
+            <motion.div 
+              initial={{ scale: 0.9, opacity: 0 }} 
+              animate={{ scale: 1, opacity: 1 }} 
+              exit={{ scale: 0.9, opacity: 0 }} 
+              transition={{ type: "spring", damping: 25, stiffness: 300 }} 
+              className="relative max-w-6xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl" 
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button 
+                onClick={() => setSelectedProduct(null)} 
+                className="absolute top-4 right-4 z-10 w-10 h-10 rounded-full bg-black/50 backdrop-blur-sm flex items-center justify-center text-white hover:bg-black/70 transition-colors"
+              >
+                <X className="w-5 h-5" />
+              </button>
+              <div className="grid md:grid-cols-2">
                 <div className="relative aspect-square md:aspect-auto">
-                  <img src={selectedProduct.image} alt={selectedProduct.title} className="w-full h-full object-cover" onError={(e) => { e.target.src = "https://via.placeholder.com/600x600?text=Product+Image"; }} />
+                  <img 
+                    src={selectedProduct.image} 
+                    alt={selectedProduct.title} 
+                    className="w-full h-full object-cover"
+                    onError={(e) => { 
+                      e.target.src = "https://via.placeholder.com/600x600?text=Product+Image"; 
+                    }} 
+                  />
                 </div>
                 <div className="p-8 flex flex-col justify-center">
-                  <span className={`inline-block w-fit text-xs px-3 py-1 rounded-full font-medium border mb-4 ${categoryColors[selectedProduct.category] || 'bg-gray-100 text-gray-800'}`}>{selectedProduct.category}</span>
-                  <h2 className="text-2xl md:text-3xl font-display font-bold text-foreground mb-4">{selectedProduct.title}</h2>
-                  <p className="text-muted-foreground mb-6">{selectedProduct.description}</p>
+                  <div className="mb-4">
+                    <span className={`inline-block text-sm px-3 py-1 rounded-full ${
+                      selectedProduct.category === "Solar Structures" 
+                        ? "bg-blue-100 text-blue-800 border border-blue-200" 
+                        : selectedProduct.category === "Cable Management" 
+                        ? "bg-green-100 text-green-800 border border-green-200"
+                        : selectedProduct.category === "Electrical" 
+                        ? "bg-red-100 text-red-800 border border-red-200"
+                        : "bg-gray-100 text-gray-800 border border-gray-200"
+                    }`}>
+                      {selectedProduct.category}
+                    </span>
+                  </div>
+                  <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+                    {selectedProduct.title}
+                  </h2>
+                  <p className="text-gray-600 mb-6 leading-relaxed whitespace-pre-line">
+                    {selectedProduct.description}
+                  </p>
                   <div className="flex gap-3">
-                    <Button variant="outline" onClick={() => setSelectedProduct(null)}>Close</Button>
-                    <Button onClick={() => { setSelectedProduct(null); scrollToSection("Contact"); }}>Request Quote</Button>
+                    <Button 
+                      variant="outline" 
+                      onClick={() => setSelectedProduct(null)}
+                      className="border-gray-300 text-gray-700 hover:bg-gray-50"
+                    >
+                      Close
+                    </Button>
+                    <Button 
+                      onClick={() => { 
+                        setSelectedProduct(null); 
+                        scrollToSection("Contact"); 
+                      }}
+                      className="bg-[#004D99] hover:bg-[#003366] text-white"
+                    >
+                      Request Quote
+                    </Button>
                   </div>
                 </div>
               </div>

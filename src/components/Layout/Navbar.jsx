@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { Link, useNavigate, useLocation } from "react-router-dom";
-import logo from "../../assets/Mechatron.png";
+import logo from "../../assets/Meekaniq.png";
+
 import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navbar = () => {
@@ -81,42 +82,42 @@ const Navbar = () => {
             isMenuOpen ? "visible" : "invisible"
           }`}
           style={{ zIndex: 60 }}
-          onClick={() => setIsMenuOpen(false)} // Close when clicking overlay
+          onClick={() => setIsMenuOpen(false)}
         >
-          {/* Mobile Menu Panel - Frosted Glass Effect */}
+          {/* Mobile Menu Panel - Dark Theme for Better Contrast */}
           <div
-            className={`absolute top-0 right-0 h-full w-64 transform transition-transform duration-300 ease-in-out ${
+            className={`absolute top-0 rounded-2xl right-0 h-full w-64 transform transition-transform duration-300 ease-in-out ${
               isMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
-            onClick={(e) => e.stopPropagation()} // Prevent closing when clicking inside menu
+            onClick={(e) => e.stopPropagation()}
             style={{
-              background: "rgba(255, 255, 255, 0.12)", // More transparent
+              background: "rgba(15, 25, 45, 0.95)", // Dark blue background
               backdropFilter: "blur(12px) saturate(180%)",
               WebkitBackdropFilter: "blur(12px) saturate(180%)",
-              borderLeft: "1px solid rgba(255, 255, 255, 0.22)",
-              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.1)",
+              borderLeft: "1px solid rgba(255, 255, 255, 0.15)",
+              boxShadow: "0 8px 32px rgba(0, 0, 0, 0.3)",
             }}
           >
             {/* Mobile Menu Header */}
-            <div className="flex justify-between items-center p-6 border-b border-white/10">
+            <div className="flex justify-between items-center p-4 pb-4 border-b border-white/10">
               <Link to="/" onClick={() => setIsMenuOpen(false)}>
-                <img src={logo} alt="Logo" className="w-20 h-16 object-contain" />
+                <img src={logo} alt="Logo" className="w-25 h-25 object-contain" />
               </Link>
               <button
                 onClick={() => setIsMenuOpen(false)}
-                className="text-gray-700 text-2xl hover:text-[#0D3773] transition-colors bg-white/20 p-2 rounded-full"
+                className="text-white text-2xl hover:text-[#4dabf7] transition-colors bg-white/10 p-2 rounded-full hover:bg-white/20"
                 aria-label="Close menu"
               >
                 <FaTimes />
               </button>
             </div>
 
-            {/* Mobile Menu Items */}
-            <ul className="flex flex-col p-6 space-y-2">
+            {/* Mobile Menu Items - White Text for Better Contrast */}
+            <ul className="flex flex-col p-6 space-y-2 ">
               <li>
                 <button
                   onClick={() => scrollToSection("Home")}
-                  className="w-full text-left text-black hover:text-[#0D3773] transition-all py-3 px-4 font-medium hover:bg-white/25 rounded-lg active:bg-white/30"
+                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-3 px-4 font-medium hover:bg-white/10 rounded-lg active:bg-white/15"
                 >
                   Home
                 </button>
@@ -124,7 +125,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={() => scrollToSection("About")}
-                  className="w-full text-left text-black hover:text-[#0D3773] transition-all py-3 px-4 font-medium hover:bg-white/25 rounded-lg active:bg-white/30"
+                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-3 px-4 font-medium hover:bg-white/10 rounded-lg active:bg-white/15"
                 >
                   About
                 </button>
@@ -132,7 +133,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={() => scrollToSection("Services")}
-                  className="w-full text-left text-black hover:text-[#0D3773] transition-all py-3 px-4 font-medium hover:bg-white/25 rounded-lg active:bg-white/30"
+                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-3 px-4 font-medium hover:bg-white/10 rounded-lg active:bg-white/15"
                 >
                   Services
                 </button>
@@ -140,7 +141,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={() => scrollToSection("Facilities")}
-                  className="w-full text-left text-black hover:text-[#0D3773] transition-all py-3 px-4 font-medium hover:bg-white/25 rounded-lg active:bg-white/30"
+                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-3 px-4 font-medium hover:bg-white/10 rounded-lg active:bg-white/15"
                 >
                   Facilities
                 </button>
@@ -149,7 +150,7 @@ const Navbar = () => {
                 <Link
                   to="/products"
                   onClick={handleProductsClick}
-                  className="block text-black hover:text-[#0D3773] transition-all py-3 px-4 font-medium hover:bg-white/25 rounded-lg active:bg-white/30"
+                  className="block text-white hover:text-[#4dabf7] transition-all py-3 px-4 font-medium hover:bg-white/10 rounded-lg active:bg-white/15"
                 >
                   Products
                 </Link>
@@ -157,7 +158,7 @@ const Navbar = () => {
               <li>
                 <button
                   onClick={() => scrollToSection("Contact")}
-                  className="w-full text-left text-black hover:text-[#0D3773] transition-all py-3 px-4 font-medium hover:bg-white/25 rounded-lg active:bg-white/30"
+                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-3 px-4 font-medium hover:bg-white/10 rounded-lg active:bg-white/15"
                 >
                   Contact
                 </button>
@@ -173,17 +174,17 @@ const Navbar = () => {
                 <span 
                   className="block text-white text-center px-4 py-3 rounded-lg font-medium transition-all duration-300 hover:shadow-lg"
                   style={{
-                    background: "linear-gradient(135deg, rgba(13, 55, 115, 0.9), rgba(9, 41, 90, 0.9))",
+                    background: "linear-gradient(135deg, rgba(77, 171, 247, 0.9), rgba(13, 55, 115, 0.9))",
                     backdropFilter: "blur(8px)",
-                    boxShadow: "0 4px 15px rgba(13, 55, 115, 0.3)"
+                    boxShadow: "0 4px 15px rgba(77, 171, 247, 0.4)"
                   }}
                   onMouseEnter={(e) => {
-                    e.currentTarget.style.background = "linear-gradient(135deg, rgba(9, 41, 90, 0.95), rgba(13, 55, 115, 0.95))";
-                    e.currentTarget.style.boxShadow = "0 6px 20px rgba(13, 55, 115, 0.4)";
+                    e.currentTarget.style.background = "linear-gradient(135deg, rgba(77, 171, 247, 0.95), rgba(13, 55, 115, 0.95))";
+                    e.currentTarget.style.boxShadow = "0 6px 20px rgba(77, 171, 247, 0.5)";
                   }}
                   onMouseLeave={(e) => {
-                    e.currentTarget.style.background = "linear-gradient(135deg, rgba(13, 55, 115, 0.9), rgba(9, 41, 90, 0.9))";
-                    e.currentTarget.style.boxShadow = "0 4px 15px rgba(13, 55, 115, 0.3)";
+                    e.currentTarget.style.background = "linear-gradient(135deg, rgba(77, 171, 247, 0.9), rgba(13, 55, 115, 0.9))";
+                    e.currentTarget.style.boxShadow = "0 4px 15px rgba(77, 171, 247, 0.4)";
                   }}
                 >
                   Get Quote

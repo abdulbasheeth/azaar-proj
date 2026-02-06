@@ -312,7 +312,7 @@ const Product = () => {
               animate={{ scale: 1, opacity: 1 }} 
               exit={{ scale: 0.9, opacity: 0 }} 
               transition={{ type: "spring", damping: 25, stiffness: 300 }} 
-              className="relative max-w-6xl w-full bg-white rounded-2xl overflow-hidden shadow-2xl" 
+              className="relative max-w-6xl w-full max-h-[90vh] bg-white rounded-2xl overflow-hidden shadow-2xl overflow-y-auto" 
               onClick={(e) => e.stopPropagation()}
             >
               <button 
@@ -321,8 +321,8 @@ const Product = () => {
               >
                 <X className="w-5 h-5" />
               </button>
-              <div className="grid md:grid-cols-2">
-                <div className="relative aspect-square md:aspect-auto">
+              <div className="grid lg:grid-cols-2">
+                <div className="relative h-64 md:h-auto md:min-h-[500px]">
                   <img 
                     src={selectedProduct.image} 
                     alt={selectedProduct.title} 
@@ -332,7 +332,7 @@ const Product = () => {
                     }} 
                   />
                 </div>
-                <div className="p-8 flex flex-col justify-center">
+                <div className="p-4 md:p-8 flex flex-col justify-center">
                   <div className="mb-4">
                     <span className={`inline-block text-sm px-3 py-1 rounded-full ${
                       selectedProduct.category === "Solar Structures" 
@@ -346,13 +346,13 @@ const Product = () => {
                       {selectedProduct.category}
                     </span>
                   </div>
-                  <h2 className="text-2xl md:text-3xl font-bold text-gray-800 mb-4">
+                  <h2 className="text-xl md:text-3xl font-bold text-gray-800 mb-4">
                     {selectedProduct.title}
                   </h2>
-                  <p className="text-gray-600 mb-6 leading-relaxed whitespace-pre-line">
+                  <p className="text-gray-600 mb-6 leading-relaxed text-sm md:text-base">
                     {selectedProduct.description}
                   </p>
-                  <div className="flex gap-3">
+                  <div className="flex flex-col sm:flex-row gap-3">
                     <Button 
                       variant="outline" 
                       onClick={() => setSelectedProduct(null)}

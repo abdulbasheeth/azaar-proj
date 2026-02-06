@@ -18,6 +18,7 @@ const Home = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentImage, setCurrentImage] = useState(0);
+  const [previousImage, setPreviousImage] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
   const navigate = useNavigate();
@@ -43,14 +44,16 @@ const Home = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Background slideshow
+  // Background slideshow with smooth transitions
   const images = [homeimg1, homeimg2, homeimg3, homeimg4, homeimg5];
+  
   useEffect(() => {
     const interval = setInterval(() => {
+      setPreviousImage(currentImage);
       setCurrentImage((prev) => (prev + 1) % images.length);
     }, 4000);
     return () => clearInterval(interval);
-  }, [images.length]);
+  }, [currentImage, images.length]);
 
   // Scroll helper
   const scrollToSection = (id) => {
@@ -83,20 +86,36 @@ const Home = () => {
 
   return (
     <div className="relative w-full min-h-screen h-auto lg:h-screen" id="Home">
-      {/* Background slideshow */}
+      {/* Background slideshow with smooth transitions */}
       <div className="absolute inset-0 overflow-hidden">
-        <img
-          src={images[currentImage]}
-          className="w-full h-full object-cover transition-opacity duration-1000"
-          alt="Home Background"
-        />
+        {images.map((image, index) => (
+          <div
+            key={index}
+            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
+              index === currentImage
+                ? "opacity-100 z-10"
+                : index === previousImage
+                ? "opacity-0 z-0"
+                : "opacity-0 z-0"
+            }`}
+          >
+            <img
+              src={image}
+              className="w-full h-full object-cover"
+              alt={`Home Background ${index + 1}`}
+            />
+          </div>
+        ))}
+        
+        {/* Optional: Add a subtle fade overlay for better text readability */}
+        <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/10 z-20" />
       </div>
 
       {/* Dark overlay */}
-      <div className="absolute inset-0 bg-[#122E4A] opacity-60" />
+      <div className="absolute inset-0 bg-[#122E4A] opacity-60 z-30" />
 
       {/* Main content */}
-      <div className="relative pt-20 lg:pt-30 px-4 sm:px-6 lg:pl-10 lg:pr-[15px] z-[2] 
+      <div className="relative pt-20 lg:pt-30 px-4 sm:px-6 lg:pl-10 lg:pr-[15px] z-[40] 
                      flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10 
                      min-h-screen lg:min-h-0">
         
@@ -119,7 +138,7 @@ const Home = () => {
             <span className="text-[#3399FF] leading-1">Delivered Precisely</span>
           </h1>
           
-          <p className="text-[#C0C6B9] text-lg sm:text-xl lg:text-2xl mt-4 lg:mt-5">
+          <p className="text-white text-lg sm:text-xl lg:text-2xl mt-4 lg:mt-5">
             We deliver precision-engineered, high-quality metal fabrication solutions including laser
             cutting, CNC machining, and industrial manufacturing services in Chennai, India. Trusted
             for accuracy, reliability, and on-time delivery.

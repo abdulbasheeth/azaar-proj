@@ -186,7 +186,7 @@ const Facilities = () => {
                         }}
                         className="bg-white shadow-lg rounded-2xl p-6 flex flex-col items-center justify-center text-center"
                     >
-                        <Counter end={15} label="Years Experience" />
+                        <Counter end={15} label="Years Experienced Professionals" />
                     </motion.div>
 
                     <motion.div 

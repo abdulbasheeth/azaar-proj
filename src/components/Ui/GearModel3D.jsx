@@ -173,11 +173,10 @@ function Scene() {
   );
 }
 
-// ---------------------------
-// Main GearModel3D Component
-// ---------------------------
+// GearModel3D.jsx
 const GearModel3D = () => {
   return (
+    // This div now fills the fixed-size container from Home.jsx
     <div className="w-full h-full">
       <Canvas
         camera={{ position: [0, 0, 5], fov: 45 }}

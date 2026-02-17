@@ -11,8 +11,9 @@ import homeimg3 from "../../assets/homeimg3.jpg";
 import homeimg4 from "../../assets/homeimg4.jpg";
 import homeimg5 from "../../assets/homeimg5.jpg";
 
-// Import 3D Gear directly
+// Import 3D Gear
 import GearModel3D from "../Ui/GearModel3D";
+
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -24,15 +25,11 @@ const Home = () => {
   const navigate = useNavigate();
   const location = useLocation();
 
-  // Check if mobile on mount and resize
+  // Check if mobile
   useEffect(() => {
-    const checkMobile = () => {
-      setIsMobile(window.innerWidth < 1024);
-    };
-    
+    const checkMobile = () => setIsMobile(window.innerWidth < 1024);
     checkMobile();
     window.addEventListener("resize", checkMobile);
-    
     return () => window.removeEventListener("resize", checkMobile);
   }, []);
 
@@ -44,9 +41,8 @@ const Home = () => {
       .finally(() => setLoading(false));
   }, []);
 
-  // Background slideshow with smooth transitions
+  // Background slideshow
   const images = [homeimg1, homeimg2, homeimg3, homeimg4, homeimg5];
-  
   useEffect(() => {
     const interval = setInterval(() => {
       setPreviousImage(currentImage);
@@ -55,38 +51,30 @@ const Home = () => {
     return () => clearInterval(interval);
   }, [currentImage, images.length]);
 
-  // Scroll helper
+  // Scroll helpers
   const scrollToSection = (id) => {
     const element = document.querySelector(id);
     if (element) {
-      const yOffset = -80; // adjust for sticky navbar
+      const yOffset = -80;
       const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset;
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
-
-  // Scroll to section if passed in location.state
   useEffect(() => {
     if (location.state?.scrollToSection) {
       scrollToSection(location.state.scrollToSection);
-      // Remove state so scroll doesn't repeat on re-render
       navigate(location.pathname, { replace: true, state: {} });
     }
   }, [location.state, location.pathname, navigate]);
 
-  // Scroll to Services button
   const scrollToServices = () => scrollToSection("#Services");
-
-  // Navigate to Products
-  const goToProductPage = () => {
-    navigate("/products", { state: { scrollToProduct: true } });
-  };
+  const goToProductPage = () => navigate("/products", { state: { scrollToProduct: true } });
 
   if (loading) return <p className="text-white">Loading home data...</p>;
 
   return (
     <div className="relative w-full min-h-screen h-auto lg:h-screen" id="Home">
-      {/* Background slideshow with smooth transitions */}
+      {/* Background slideshow */}
       <div className="absolute inset-0 overflow-hidden">
         {images.map((image, index) => (
           <div
@@ -106,8 +94,6 @@ const Home = () => {
             />
           </div>
         ))}
-        
-        {/* Optional: Add a subtle fade overlay for better text readability */}
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/10 z-20" />
       </div>
 
@@ -146,7 +132,7 @@ const Home = () => {
 
           {/* Buttons Row */}
           <div className="flex flex-col sm:flex-row gap-4 mt-6 lg:mt-7">
-             <button
+            <button
               onClick={goToProductPage}
               className="inline-flex items-center justify-center gap-3 bg-[#0E7CE9] text-white px-4 sm:px-5 py-3 
                        text-lg sm:text-xl lg:text-2xl font-serif rounded-2xl hover:backdrop-blur-sm group 
@@ -169,7 +155,7 @@ const Home = () => {
           </div>
         </motion.div>
 
-        {/* Right 3D Gear - Hidden on mobile */}
+        {/* Right 3D Gear - hidden on mobile */}
         {!isMobile && (
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}

@@ -118,7 +118,7 @@ const Footer = () => {
               <img
                 src={logo2}
                 alt="Logo"
-                className="w-32 h-28 md:w-36 md:h-32 mb-4 md:mb-5"
+                className="h-16 md:h-20 w-auto mb-4 md:mb-5"
               />
               <div className="text-white/80 max-w-md">
                 <h2 className="font-bold text-xl md:text-2xl mb-2 md:mb-3 text-white">
@@ -178,7 +178,7 @@ const Footer = () => {
                     <MapPin className="w-full h-full text-blue-400" />
                   </div>
                   <span className="text-white/70 text-sm md:text-base flex-1 text-left hover:text-white transition-colors duration-300">
-                    No. 45, Industrial Estate, Ambattur <span className="block md:inline">Chennai - 600058</span>
+                    No.11, Pillaiyar Kovil Street Ambattur Industrial Estate,Ambattur <span className="block md:inline">Chennai - 600098</span>
                   </span>
                 </li>
                 <li className="flex items-center gap-3 md:gap-4">
@@ -186,7 +186,7 @@ const Footer = () => {
                     <Phone className="w-full h-full text-blue-400" />
                   </div>
                   <span className="text-white/70 text-sm md:text-base flex-1 text-left hover:text-white transition-colors duration-300">
-                    +91 44262 51234
+                    +91 97917 79905
                   </span>
                 </li>
                 <li className="flex items-center gap-3 md:gap-4">
@@ -194,7 +194,7 @@ const Footer = () => {
                     <Mail className="w-full h-full text-blue-400" />
                   </div>
                   <span className="text-white/70 text-sm md:text-base flex-1 text-left hover:text-white transition-colors duration-300">
-                    info@themechatron.com
+                    mr.mekaniq1@gmail.com
                   </span>
                 </li>
               </ul>

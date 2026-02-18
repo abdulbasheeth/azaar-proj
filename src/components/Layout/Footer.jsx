@@ -51,9 +51,9 @@ const Footer = () => {
     <footer className="relative overflow-hidden">
       {/* Enhanced Background Gradient */}
       <div className="absolute inset-0 bg-gradient-to-br from-slate-900 via-blue-900/90 to-slate-900"></div>
-      
+
       {/* Subtle Overlay Pattern */}
-      <div 
+      <div
         className="absolute inset-0 opacity-10"
         style={{
           backgroundImage: `linear-gradient(45deg, #1e293b 25%, transparent 25%),
@@ -178,7 +178,7 @@ const Footer = () => {
                     <MapPin className="w-full h-full text-blue-400" />
                   </div>
                   <span className="text-white/70 text-sm md:text-base flex-1 text-left hover:text-white transition-colors duration-300">
-                    No.11, Pillaiyar Kovil Street Ambattur Industrial Estate,Ambattur <span className="block md:inline">Chennai - 600098</span>
+                    No.11, Pillaiyar Koil Street Ambattur Industrial Estate,Ambattur <span className="block md:inline">Chennai - 600098</span>
                   </span>
                 </li>
                 <li className="flex items-center gap-3 md:gap-4">
@@ -187,6 +187,8 @@ const Footer = () => {
                   </div>
                   <span className="text-white/70 text-sm md:text-base flex-1 text-left hover:text-white transition-colors duration-300">
                     +91 97917 79905
+                    <br />
+                    +91 96290 40496
                   </span>
                 </li>
                 <li className="flex items-center gap-3 md:gap-4">
@@ -194,6 +196,8 @@ const Footer = () => {
                     <Mail className="w-full h-full text-blue-400" />
                   </div>
                   <span className="text-white/70 text-sm md:text-base flex-1 text-left hover:text-white transition-colors duration-300">
+                    info@mrmekaniq.com
+                    <br />
                     mr.mekaniq1@gmail.com
                   </span>
                 </li>
@@ -221,6 +225,6 @@ const Footer = () => {
       </div>
     </footer>
   );
-};
+}
 
 export default Footer;

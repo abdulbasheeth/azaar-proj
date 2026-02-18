@@ -112,7 +112,7 @@ Message: ${formData.message}`;
     <section
       id="Contact"
       
-      className="relative py-20 lg:py-28  bg-gray-900 text-white overflow-hidden"
+      className="relative py-25 lg:py-28  bg-gray-900 text-white overflow-hidden"
     >
       {/* Ambient Glow */}
       <div  className="absolute -top-60 left-1/2 w-[700px] h-[700px] bg-blue-600/20 blur-[200px] rounded-full -translate-x-1/2" />

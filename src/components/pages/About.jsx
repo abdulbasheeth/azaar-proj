@@ -17,7 +17,7 @@ const About = () => {
   return (
     <section
       id="About"
-      className="pt-16 sm:pt-20 lg:pt-24 min-h-screen flex flex-col justify-center bg-[#F5F5F5] relative overflow-hidden"
+      className="mt-10 mb-10 lg:mt-2 lg:mb-10 bg-background pt-23"
     >
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#E0E7FF] via-[#F0F4FF] to-[#E8F0FF]" />
@@ -63,7 +63,7 @@ const About = () => {
           initial={{ scale: 0.9, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="px-4 py-1.5 font-serif rounded-3xl text-base sm:text-lg lg:text-xl text-[#1484F4] bg-white shadow-lg font-bold mb-6"
+          className="px-4 py-1.5 font-serif rounded-3xl text-base  sm:text-lg lg:text-xl text-[#1484F4] bg-[#D8E1EA] shadow-lg font-bold mb-6"
         >
           About Us
         </motion.span>
@@ -146,14 +146,13 @@ const About = () => {
             transition={{ duration: 0.6, delay: 0.2 }}
             className="relative space-y-3 sm:space-y-4 mt-10 lg:mt-0"
           >
-            {/* Mission Card - Added mt-10 */}
+            {/* Mission Card */}
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.3 }}
               whileHover={{ y: -5 }}
-      className="bg-white rounded-xl p-4 sm:p-5 shadow-lg border border-white/20 mt-5 md:mt-20"
-
+              className="bg-white rounded-xl p-4 sm:p-5 shadow-lg border border-white/20 mt-5 md:mt-20"
             >
               <div className="flex items-center gap-3 mb-2">
                 <motion.div

@@ -97,7 +97,7 @@ const Navbar = () => {
           </li>
         </ul>
 
-        {/* Right: Desktop Get Quote Button */}
+        {/* Desktop Get Quote Button */}
         <div className="hidden lg:block">
           <button 
             onClick={() => scrollToSection("Contact")}
@@ -124,9 +124,9 @@ const Navbar = () => {
           style={{ zIndex: 60 }}
           onClick={() => setIsMenuOpen(false)}
         >
-          {/* Mobile Menu Panel */}
+          {/* Mobile Menu Panel - Now using flex column */}
           <div
-            className={`absolute top-0 right-0 h-full w-80 sm:w-96 transform transition-transform duration-300 ease-in-out ${
+            className={`absolute top-0 right-0 left-0 h-full w-80 sm:w-96 transform transition-transform duration-300 ease-in-out flex flex-col ${
               isMenuOpen ? "translate-x-0" : "translate-x-full"
             }`}
             onClick={(e) => e.stopPropagation()}
@@ -159,61 +159,63 @@ const Navbar = () => {
               </button>
             </div>
 
-            {/* Mobile Menu Items */}
-            <ul className="flex flex-col p-6 space-y-1">
-              <li>
-                <button
-                  onClick={() => scrollToSection("Home")}
-                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
-                >
-                  <span className="mr-3">🏠</span> Home
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("About")}
-                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
-                >
-                  <span className="mr-3">ℹ️</span> About
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("Services")}
-                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
-                >
-                  <span className="mr-3">🛠️</span> Services
-                </button>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("Facilities")}
-                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
-                >
-                  <span className="mr-3">🏭</span> Facilities
-                </button>
-              </li>
-              <li>
-                <Link
-                  to="/products"
-                  onClick={handleProductsClick}
-                  className="block text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
-                >
-                  <span className="mr-3">📦</span> Products
-                </Link>
-              </li>
-              <li>
-                <button
-                  onClick={() => scrollToSection("Contact")}
-                  className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
-                >
-                  <span className="mr-3">📞</span> Contact
-                </button>
-              </li>
-            </ul>
+            {/* Mobile Menu Items - Scrollable area */}
+            <div className="flex-1 overflow-y-auto py-2 px-6">
+              <ul className="space-y-1">
+                <li>
+                  <button
+                    onClick={() => scrollToSection("Home")}
+                    className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
+                  >
+                    <span className="mr-3">🏠</span> Home
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToSection("About")}
+                    className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
+                  >
+                    <span className="mr-3">ℹ️</span> About
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToSection("Services")}
+                    className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
+                  >
+                    <span className="mr-3">🛠️</span> Services
+                  </button>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToSection("Facilities")}
+                    className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
+                  >
+                    <span className="mr-3">🏭</span> Facilities
+                  </button>
+                </li>
+                <li>
+                  <Link
+                    to="/products"
+                    onClick={handleProductsClick}
+                    className="block text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
+                  >
+                    <span className="mr-3">📦</span> Products
+                  </Link>
+                </li>
+                <li>
+                  <button
+                    onClick={() => scrollToSection("Contact")}
+                    className="w-full text-left text-white hover:text-[#4dabf7] transition-all py-4 px-6 text-lg font-medium hover:bg-white/10 rounded-xl active:bg-white/15 flex items-center"
+                  >
+                    <span className="mr-3">📞</span> Contact
+                  </button>
+                </li>
+              </ul>
+            </div>
 
-            {/* Mobile Get Quote Button */}
-            <div className="absolute bottom-8 left-6 right-6">
+            {/* Mobile Get Quote Button - Now part of flow, not absolute */}
+            <div className="p-6 pt-2">
               <button
                 onClick={() => {
                   scrollToSection("Contact");

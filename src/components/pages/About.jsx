@@ -1,37 +1,61 @@
-import { motion, useInView } from "framer-motion";
+import { motion } from "framer-motion";
+import { useInView } from "framer-motion";
 import { useRef } from "react";
 import { CheckCircle2 } from "lucide-react";
 
 const features = [
-  { bold: "Precision & Quality Driven", normal: " manufacturing processes" },
-  { bold: "Sector Expertise", normal: " in solar, automotive, construction, and industrial applications" },
-  { bold: "Advanced Infrastructure", normal: " with modern machinery and skilled professionals" },
-  { bold: "On-Time Delivery", normal: " without compromising quality" },
-  { bold: "Customer-Focused Approach", normal: " with tailored solutions" }
+  {
+    bold: "Precision & Quality Driven",
+    normal: " manufacturing processes"
+  },
+  {
+    bold: "Sector Expertise",
+    normal: " in solar, automotive, construction, and industrial applications"
+  },
+  {
+    bold: "Advanced Infrastructure",
+    normal: " with modern machinery and skilled professionals"
+  },
+  {
+    bold: "On-Time Delivery",
+    normal: " without compromising quality"
+  },
+  {
+    bold: "Customer-Focused Approach",
+    normal: " with tailored solutions"
+  }
 ];
 
 const About = () => {
   const ref = useRef(null);
-  const isInView = useInView(ref, { once: true, margin: "-50px" });
+  const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section
-      id="About"
-      className="mt-10 mb-10 lg:mt-2 lg:mb-10 bg-background pt-23"
-    >
+    <section id="About" className="pt-28 lg:pt-32 min-h-screen flex flex-col justify-center bg-[#F5F5F5] relative overflow-hidden pb-12 lg:pb-5">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#E0E7FF] via-[#F0F4FF] to-[#E8F0FF]" />
 
-      {/* Floating Particles */}
-      <div className="absolute inset-0 overflow-hidden pointer-events-none">
-        {[...Array(8)].map((_, i) => (
+      {/* Floating Particles Animation */}
+      <div className="absolute inset-0 overflow-hidden">
+        {[...Array(15)].map((_, i) => (
           <motion.div
             key={i}
-            className="absolute w-1.5 h-1.5 rounded-full bg-[#1484F4]/20 will-change-transform"
-            style={{ x: Math.random() * 100 + "%", y: Math.random() * 100 + "%" }}
+            className="absolute w-2 h-2 rounded-full bg-[#1484F4]/20"
+            initial={{
+              x: Math.random() * 100 + "vw",
+              y: Math.random() * 100 + "vh",
+            }}
             animate={{
-              x: [null, Math.random() * 100 + "%", Math.random() * 100 + "%"],
-              y: [null, Math.random() * 100 + "%", Math.random() * 100 + "%"],
+              x: [
+                Math.random() * 100 + "vw",
+                Math.random() * 100 + "vw",
+                Math.random() * 100 + "vw",
+              ],
+              y: [
+                Math.random() * 100 + "vh",
+                Math.random() * 100 + "vh",
+                Math.random() * 100 + "vh",
+              ],
             }}
             transition={{
               duration: 20 + Math.random() * 10,
@@ -42,11 +66,18 @@ const About = () => {
         ))}
       </div>
 
-      {/* Animated Wave */}
+      {/* Animated Wave Pattern */}
       <motion.div
-        className="absolute -bottom-20 -left-20 w-64 lg:w-96 h-64 lg:h-96 opacity-10 hidden lg:block"
-        animate={{ rotate: 360, scale: [1, 1.1, 1] }}
-        transition={{ duration: 20, repeat: Infinity, ease: "linear" }}
+        className="absolute bottom-0 -left-20 w-96 h-96 opacity-10"
+        animate={{
+          rotate: 360,
+          scale: [1, 1.2, 1],
+        }}
+        transition={{
+          duration: 20,
+          repeat: Infinity,
+          ease: "linear",
+        }}
       >
         <svg viewBox="0 0 200 200" className="w-full h-full text-[#1484F4]">
           <path
@@ -57,20 +88,65 @@ const About = () => {
         </svg>
       </motion.div>
 
-      {/* About Us Badge */}
+      {/* Animated Geometric Pattern */}
+      <motion.div
+        className="absolute top-10 right-10 w-64 h-64 opacity-5"
+        animate={{
+          rotate: -360,
+        }}
+        transition={{
+          duration: 40,
+          repeat: Infinity,
+          ease: "linear",
+        }}
+      >
+        <svg viewBox="0 0 100 100" className="w-full h-full text-[#09295a]">
+          <path
+            fill="currentColor"
+            d="M50,5 L80,40 L95,50 L80,60 L50,95 L20,60 L5,50 L20,40 Z"
+          />
+        </svg>
+      </motion.div>
+
+      {/* Animated Connection Lines */}
+      <div className="absolute inset-0">
+        <svg className="w-full h-full">
+          <motion.path
+            d="M0,50 Q100,50 200,100"
+            stroke="#1484F4"
+            strokeWidth="1"
+            strokeOpacity="0.1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear" }}
+          />
+          <motion.path
+            d="M200,150 Q100,200 0,100"
+            stroke="#1484F4"
+            strokeWidth="1"
+            strokeOpacity="0.1"
+            fill="none"
+            initial={{ pathLength: 0 }}
+            animate={{ pathLength: 1 }}
+            transition={{ duration: 2, repeat: Infinity, ease: "linear", delay: 0.5 }}
+          />
+        </svg>
+      </div>
+
       <div className="flex justify-center relative z-10">
         <motion.span
           initial={{ scale: 0.9, opacity: 0 }}
           animate={isInView ? { scale: 1, opacity: 1 } : {}}
           transition={{ duration: 0.5 }}
-          className="px-4 py-1.5 font-serif rounded-3xl text-base  sm:text-lg lg:text-xl text-[#1484F4] bg-[#D8E1EA] shadow-lg font-bold mb-6"
+          className="inline-block font-serif text-2xl px-4 py-1.5 rounded-full bg-primary/20 text-primary inline p-2 rounded-2xl text-[#1484F4] px-6 bg-[#D8E1EA] font-semibold mb-4"
         >
           About Us
         </motion.span>
       </div>
 
-      <div className="container mx-auto px-3 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid lg:grid-cols-2 gap-6 lg:gap-12 items-start">
+      <div className="container mx-auto px-4 relative z-10">
+        <div className="grid lg:grid-cols-2 gap-8 lg:gap-16 items-center">
           {/* Left Content */}
           <motion.div
             ref={ref}
@@ -82,7 +158,7 @@ const About = () => {
               initial={{ opacity: 0, y: 20 }}
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.1 }}
-              className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-[#09295a] mb-3 sm:mb-4"
+              className="text-2xl sm:text-3xl lg:text-4xl font-display font-bold text-[#09295a] mb-3"
             >
               Who We <span className="text-[#1484F4]">Are</span>
             </motion.h2>
@@ -92,12 +168,12 @@ const About = () => {
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.2 }}
             >
-              <p className="text-sm sm:text-base text-[#374151] mb-2 leading-relaxed">
+              <p className="text-sm sm:text-base text-[#374151] mb-3">
                 Established in 2023, we are a precision‑driven metal fabrication company based in Chennai, India.
                 Built on engineering expertise and a commitment to quality, we deliver reliable metal solutions
                 that meet the evolving needs of modern industries.
               </p>
-              <p className="text-[#374151] mb-3 text-sm sm:text-base leading-relaxed">
+              <p className="text-[#374151] mb-4 text-sm sm:text-base">
                 By combining advanced manufacturing technology with skilled craftsmanship, we ensure accuracy,
                 durability, and consistency in every product we deliver.
               </p>
@@ -109,7 +185,7 @@ const About = () => {
               animate={isInView ? { opacity: 1, y: 0 } : {}}
               transition={{ duration: 0.5, delay: 0.3 }}
             >
-              <h3 className="text-base sm:text-lg font-bold text-[#111827] mb-3">Why Choose Us</h3>
+              <h3 className="text-lg sm:text-xl font-bold text-[#111827] mb-3">Why Choose Us</h3>
               <div className="grid gap-2 mb-4">
                 {features.map((feature, index) => (
                   <motion.div
@@ -119,8 +195,13 @@ const About = () => {
                     transition={{ duration: 0.4, delay: 0.4 + index * 0.1 }}
                     className="flex items-start gap-2"
                   >
-                    <CheckCircle2 className="w-5 h-5 sm:w-4 sm:h-4 text-[#1484F4] flex-shrink-0 mt-0.5" />
-                    <span className="text-sm text-[#111827] leading-tight">
+                    <motion.div
+                      whileHover={{ scale: 1.2 }}
+                      whileTap={{ scale: 0.9 }}
+                    >
+                      <CheckCircle2 className="w-4 h-4 text-[#1484F4] flex-shrink-0 mt-0.5" />
+                    </motion.div>
+                    <span className="text-xs sm:text-sm text-[#111827]">
                       <span className="font-bold">{feature.bold}</span>
                       {feature.normal}
                     </span>
@@ -133,7 +214,7 @@ const About = () => {
               initial={{ opacity: 0 }}
               animate={isInView ? { opacity: 1 } : {}}
               transition={{ duration: 0.6, delay: 0.8 }}
-              className="text-[#374151] italic text-xs sm:text-sm leading-relaxed"
+              className="text-[#374151] italic text-xs sm:text-sm"
             >
               We aim to build lasting partnerships by delivering metal solutions that stand for strength, precision, and trust.
             </motion.p>
@@ -144,28 +225,29 @@ const About = () => {
             initial={{ opacity: 0, x: 30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.6, delay: 0.2 }}
-            className="relative space-y-3 sm:space-y-4 mt-10 lg:mt-0"
+            className="relative space-y-4"
           >
             {/* Mission Card */}
             <motion.div
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.3 }}
-              whileHover={{ y: -5 }}
-              className="bg-white rounded-xl p-4 sm:p-5 shadow-lg border border-white/20 mt-5 md:mt-20"
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="bg-white rounded-xl p-4 sm:p-5 shadow-lg border border-white/20 backdrop-blur-sm"
             >
               <div className="flex items-center gap-3 mb-2">
                 <motion.div
-                  className="w-8 h-8 rounded-lg bg-gradient-to-br from-[#E0E7FF] to-[#1484F4]/20 flex items-center justify-center"
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#E0E7FF] to-[#1484F4]/20 flex items-center justify-center"
                   whileHover={{ rotate: 15 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <svg className="w-4 h-4 text-[#1484F4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#1484F4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                   </svg>
                 </motion.div>
-                <h3 className="text-base font-semibold text-[#111827]">Our Mission</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-[#111827]">Our Mission</h3>
               </div>
-              <p className="text-sm text-[#374151] leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#374151]">
                 To provide high‑quality metal solutions that exceed customer expectations through innovation,
                 craftsmanship, and reliability.
               </p>
@@ -176,22 +258,23 @@ const About = () => {
               initial={{ opacity: 0, y: 20, scale: 0.95 }}
               animate={isInView ? { opacity: 1, y: 0, scale: 1 } : {}}
               transition={{ duration: 0.4, delay: 0.4 }}
-              whileHover={{ y: -5 }}
-              className="bg-[#1484F4] rounded-xl p-4 sm:p-5 shadow-lg border border-[#1484F4]/20 mb-10 text-white"
+              whileHover={{ y: -5, transition: { duration: 0.2 } }}
+              className="bg-white rounded-xl p-4 sm:p-5 shadow-lg border border-white/20 backdrop-blur-sm"
             >
               <div className="flex items-center gap-3 mb-2">
                 <motion.div
-                  className="w-8 h-8 rounded-lg bg-white flex items-center justify-center"
+                  className="w-8 h-8 sm:w-10 sm:h-10 rounded-lg bg-gradient-to-br from-[#E0E7FF] to-[#1484F4]/20 flex items-center justify-center"
                   whileHover={{ rotate: -15 }}
+                  transition={{ duration: 0.2 }}
                 >
-                  <svg className="w-4 h-4 text-[#1484F4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 011-6 0 3 3 0 016 0z" />
+                  <svg className="w-4 h-4 sm:w-5 sm:h-5 text-[#1484F4]" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M2.458 12C3.732 7.943 7.523 5 12 5c4.478 0 8.268 2.943 9.542 7-1.274 4.057-5.064 7-9.542 7-4.477 0-8.268-2.943-9.542-7z" />
                   </svg>
                 </motion.div>
-                <h3 className="text-base font-semibold text-white">Our Vision</h3>
+                <h3 className="text-base sm:text-lg font-semibold text-[#111827]">Our Vision</h3>
               </div>
-              <p className="text-sm text-white/90 leading-relaxed">
+              <p className="text-xs sm:text-sm text-[#374151]">
                 To be a trusted partner in metal fabrication, recognized for engineering excellence and
                 sustainable growth in solar, automotive, construction, and industrial sectors.
               </p>

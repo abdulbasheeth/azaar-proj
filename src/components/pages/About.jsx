@@ -31,7 +31,7 @@ const About = () => {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="About" className="pt-28 lg:pt-32 min-h-screen flex flex-col justify-center bg-[#F5F5F5] relative overflow-hidden pb-12 lg:pb-5">
+    <section id="About" className="pt-28 lg:pt-26 min-h-screen flex flex-col justify-center bg-[#F5F5F5] relative overflow-hidden pb-12 lg:pb-5">
       {/* Gradient Background */}
       <div className="absolute inset-0 bg-gradient-to-br from-[#E0E7FF] via-[#F0F4FF] to-[#E8F0FF]" />
 

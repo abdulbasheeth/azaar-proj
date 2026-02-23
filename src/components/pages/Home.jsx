@@ -10,6 +10,8 @@ import homeimg2 from "../../assets/homeimg2.jpg";
 import homeimg3 from "../../assets/homeimg3.jpg";
 import homeimg4 from "../../assets/homeimg4.jpg";
 import homeimg5 from "../../assets/homeimg5.jpg";
+import homeimg6 from "../../assets/homeimg6.jpg";
+
 
 // Import 3D Gear
 import GearModel3D from "../Ui/GearModel3D";
@@ -42,7 +44,7 @@ const Home = () => {
   }, []);
 
   // Background slideshow
-  const images = [homeimg1, homeimg2, homeimg3, homeimg4, homeimg5];
+  const images = [homeimg1,homeimg4, homeimg2, homeimg3, homeimg5,homeimg6];
   useEffect(() => {
     const interval = setInterval(() => {
       setPreviousImage(currentImage);

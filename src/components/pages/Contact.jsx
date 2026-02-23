@@ -27,7 +27,7 @@ const contactInfo = [
   {
     icon: Clock,
     title: "Working Hours",
-    details: ["24/7 Production Support", "Office: Mon-Sat 9.30AM to 5.30PM"],
+    details: ["24/7 Production Support", "Office: Mon-Sat 9.30AM to5.30PM"],
   },
 ];
 
@@ -126,7 +126,7 @@ Message: ${formData.message}`;
           transition={{ duration: 0.6 }}
           className="text-center max-w-3xl mx-auto mb-16 lg:mb-20"
         >
-          <span className="inline-block mb-5 px-5 py-2 text-lh rounded-full font-serif bg-white/10 text-blue-500">
+          <span className="inline-block mb-5 px-5 py-2 text-lh rounded-full font-serif text-2xl bg-white/10 text-blue-500">
             Contact Us
           </span>
 

@@ -2,7 +2,7 @@ import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getHomeData } from "../../api";
 import { motion } from "framer-motion";
-import { Shield, ArrowRight } from "lucide-react";
+import { Shield, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import images
 import homeimg1 from "../../assets/homeimg1.jpg";
@@ -12,10 +12,8 @@ import homeimg4 from "../../assets/homeimg4.jpg";
 import homeimg5 from "../../assets/homeimg5.jpg";
 import homeimg6 from "../../assets/homeimg6.jpg";
 
-
 // Import 3D Gear
 import GearModel3D from "../Ui/GearModel3D";
-
 
 const Home = () => {
   const [data, setData] = useState(null);
@@ -26,6 +24,9 @@ const Home = () => {
 
   const navigate = useNavigate();
   const location = useLocation();
+
+  // Image array
+  const images = [homeimg1, homeimg4, homeimg2, homeimg3, homeimg5, homeimg6];
 
   // Check if mobile
   useEffect(() => {
@@ -44,7 +45,6 @@ const Home = () => {
   }, []);
 
   // Background slideshow
-  const images = [homeimg1,homeimg4, homeimg2, homeimg3, homeimg5,homeimg6];
   useEffect(() => {
     const interval = setInterval(() => {
       setPreviousImage(currentImage);
@@ -52,6 +52,17 @@ const Home = () => {
     }, 4000);
     return () => clearInterval(interval);
   }, [currentImage, images.length]);
+
+  // Manual Navigation Functions
+  const goToNext = () => {
+    setPreviousImage(currentImage);
+    setCurrentImage((prev) => (prev + 1) % images.length);
+  };
+
+  const goToPrev = () => {
+    setPreviousImage(currentImage);
+    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
+  };
 
   // Scroll helpers
   const scrollToSection = (id) => {
@@ -62,6 +73,7 @@ const Home = () => {
       window.scrollTo({ top: y, behavior: "smooth" });
     }
   };
+  
   useEffect(() => {
     if (location.state?.scrollToSection) {
       scrollToSection(location.state.scrollToSection);
@@ -102,8 +114,31 @@ const Home = () => {
       {/* Dark overlay */}
       <div className="absolute inset-0 bg-[#122E4A] opacity-60 z-30" />
 
-      {/* Main content */}
-      <div className="relative pt-20 lg:pt-30 px-4 sm:px-6 lg:pl-10 lg:pr-[15px] z-[40] 
+      {/* Navigation Arrows - Kept only for Windows/Desktop (Removed on Mobile) */}
+      {!isMobile && (
+        <div className="absolute inset-y-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-2 pointer-events-none">
+          {/* Left Arrow */}
+          <button
+            onClick={goToPrev}
+            className="p-2 sm:p-3 bg-black/30 backdrop-blur-sm rounded-full text-white hover:bg-[#3399FF]/80 transition-all pointer-events-auto"
+            aria-label="Previous Image"
+          >
+            <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
+          </button>
+
+          {/* Right Arrow */}
+          <button
+            onClick={goToNext}
+            className="p-2 sm:p-3 bg-black/30 backdrop-blur-sm rounded-full text-white hover:bg-[#3399FF]/80 transition-all pointer-events-auto"
+            aria-label="Next Image"
+          >
+            <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
+          </button>
+        </div>
+      )}
+
+      {/* Main content - Added padding to left (pl-20) and right (pr-10) to clear arrows if needed on desktop */}
+      <div className="relative pt-20 lg:pt-30 px-4 sm:px-6 lg:pl-22 lg:pr-10 z-[40] 
                      flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10 
                      min-h-screen lg:min-h-0">
         
@@ -164,7 +199,7 @@ const Home = () => {
             animate={{ opacity: 1, scale: 1 }}
             transition={{ duration: 0.8 }}
             className="flex-1 w-full lg:w-[500px] h-[300px] lg:h-[500px] max-w-full lg:max-w-[500px] 
-                      max-h-[300px] lg:max-h-[420px] relative lg:mr-10 mt-8 lg:mt-0"
+                      max-h-[300px] lg:max-h-[420px] relative lg:mr-16 mt-8 lg:mt-0"
           >
             <div className="absolute inset-0 bg-gradient-radial from-industrial-blue/20 via-transparent to-transparent rounded-full blur-3xl" />
             <motion.div

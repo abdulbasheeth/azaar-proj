@@ -19,7 +19,7 @@ import walkway from "../../assets/product-walkway.jpg";
 import clamps from "../../assets/product-clamps.jpg";
 import accessories from "../../assets/product-accessories.jpg";
 
-// Product data with full descriptions and categories
+// Product data
 const products = [
   {
     id: "rooftop-standard",
@@ -124,7 +124,6 @@ const Product = () => {
       ? products.length
       : products.filter((p) => p.category === category).length;
 
-  // Scroll helpers
   const scrollToSection = (id) => {
     if (location.pathname !== "/") {
       navigate("/", { replace: false });
@@ -149,8 +148,8 @@ const Product = () => {
     <div className="min-h-screen bg-[#F0F4F7]">
       <Navbar />
 
-      {/* Hero Section */}
-      <section id="products" className="pt-28 pb-16 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
+      {/* Hero Section - Decreased bottom padding */}
+      <section id="products" className="pt-28 pb-10 bg-gradient-to-b from-primary/5 to-background relative overflow-hidden">
         <div className="absolute inset-0 pointer-events-none overflow-hidden">
           {[...Array(4)].map((_, i) => (
             <motion.div
@@ -167,10 +166,7 @@ const Product = () => {
               transition={{ duration: 20 + i * 5, repeat: Infinity, ease: "linear" }}
             >
               <svg viewBox="0 0 100 100" className="w-full h-full">
-                <path
-                  d="M50 10 L55 25 L70 20 L65 35 L80 40 L70 50 L80 60 L65 65 L70 80 L55 75 L50 90 L45 75 L30 80 L35 65 L20 60 L30 50 L20 40 L35 35 L30 20 L45 25 Z"
-                  fill="#004D99"
-                />
+                <path d="M50 10 L55 25 L70 20 L65 35 L80 40 L70 50 L80 60 L65 65 L70 80 L55 75 L50 90 L45 75 L30 80 L35 65 L20 60 L30 50 L20 40 L35 35 L30 20 L45 25 Z" fill="#004D99" />
                 <circle cx="50" cy="50" r="15" fill="white" />
               </svg>
             </motion.div>
@@ -208,10 +204,10 @@ const Product = () => {
         </div>
       </section>
 
-      {/* Filter Section */}
-      <section className="py-8 text-gray-500 bg-background/95 top-0 z-40">
+      {/* Filter Section - Decreased padding */}
+      <section className="py-4 text-gray-500 bg-background/95 top-0 z-40">
         <div className="container mx-auto px-4">
-          <div className="flex items-center gap-3 overflow-x-auto pb-8 scrollbar-hide mt-10">
+          <div className="flex items-center gap-3 overflow-x-auto scrollbar-hide">
             <Filter className="w-5 h-5 text-muted-foreground flex-shrink-0" />
             {categories.map(category => (
               <button
@@ -234,8 +230,8 @@ const Product = () => {
         </div>
       </section>
 
-      {/* Product Grid */}
-      <section className="py-10">
+      {/* Product Grid - Decreased padding */}
+      <section className="py-6">
         <div className="container mx-auto px-4">
           <motion.div layout className="grid sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
             <AnimatePresence mode="popLayout">
@@ -264,7 +260,8 @@ const Product = () => {
                     />
                   </div>
                   <div className="p-5">
-                    <h3 className="font-bold whitespace-nowrap text-lg text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
+                    {/* FIX: Removed whitespace-nowrap and changed text-lg to text-base to prevent hiding letters */}
+                    <h3 className="font-bold text-base text-gray-800 mb-2 group-hover:text-blue-600 transition-colors">
                       {product.title}
                     </h3>
                     <p className="text-sm text-gray-600 mb-3 line-clamp-3">

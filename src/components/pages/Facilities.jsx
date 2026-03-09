@@ -14,42 +14,50 @@ const facilities = [
         description: "Precision fiber laser technology for complex cuts",
         specs: ["3000W Fiber Laser", "Up to 20mm thickness", "Auto loading system"],
         image: facilityLaser,
-        span: "col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2", // Large Box (2x2)
+        // Large Box (2x2) - Anchors the top-left
+        span: "col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-2",
     },
     {
-        title: "24/7 Production",
-        description: "Round-the-clock manufacturing capability",
-        specs: ["Three shift operation", "Real-time monitoring", "Automated systems"],
-        image: facilityProduction,
-        span: "col-span-1 md:col-span-2 lg:col-span-3 lg:row-span-1", // Wide Box (3x1) to fill Row 1
-    },
-    {
+        // CONTENT SWAPPED: Now Roll Forming is in the Wide Box
         title: "Roll Forming",
         description: "Continuous metal shaping for consistent profiles",
         specs: ["High-speed production", "Major Machinery"],
         image: facilityRoll,
-        span: "col-span-1 md:col-span-2 lg:col-span-3 lg:row-span-1", // Kept as requested
+        // Wide Box (2x1) - Occupies the top-right main space
+        span: "col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-1",
+    },
+    {
+        // CONTENT SWAPPED: Now 24/7 Production is in the Small Box
+        title: "24/7 Production",
+        description: "Round-the-clock manufacturing capability",
+        specs: ["Three shift operation", "Real-time monitoring", "Automated systems"],
+        image: facilityProduction,
+        // Small Box (1x1) - Fills the remaining gap in the top-right
+        span: "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1",
     },
     {
         title: "CNC Folding",
         description: "Multi-axis precision machining",
         specs: ["5-Axis CNC Mills", "0.01mm precision"],
         image: serviceFolding,
-        span: "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1", // Fills remaining gap in Row 2
+        // Small Box (1x1) - First item of the bottom-right row
+        span: "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1",
     },
     {
         title: "Quality Lab",
         description: "Rigorous testing standards",
         specs: ["CMM inspection", "Material verification"],
         image: facilityQuality,
-        span: "col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-1", // Large bottom box
+        // Small Box (1x1) - Second item of the bottom-right row
+        span: "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1",
     },
     {
         title: "Power Press",
         description: "Heavy-duty stamping and punching operations",
         specs: ["Hydraulic press", "High tonnage capacity"],
         image: facilitypowerpress,
-        span: "col-span-1 md:col-span-2 lg:col-span-2 lg:row-span-1", // Aligned with Quality Lab
+        // Small Box (1x1) - Third item of the bottom-right row
+        span: "col-span-1 md:col-span-1 lg:col-span-1 lg:row-span-1",
     },
 ];
 
@@ -87,7 +95,7 @@ const Facilities = () => {
                 </motion.div>
 
                 {/* Grid Layout */}
-                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6 auto-rows-[minmax(360px,auto)]">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-5 gap-4 lg:gap-6 auto-rows-[minmax(280px,auto)]">
                     {facilities.map((facility, index) => (
                         <motion.div
                             key={facility.title}
@@ -113,7 +121,7 @@ const Facilities = () => {
                                 ${facility.span}
                             `}
                         >
-                            {/* Background Image - Fixed to cover full box */}
+                            {/* Background Image */}
                             <div className="absolute inset-0 w-full h-full">
                                 <img
                                     src={facility.image}

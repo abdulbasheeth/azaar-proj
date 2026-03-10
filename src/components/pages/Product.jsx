@@ -24,14 +24,14 @@ const products = [
   {
     id: "rooftop-standard",
     title: "Roof Top Structure - Standard",
-    description: "Our pre-engineered standard rooftop mounting structures are designed for efficient solar installations with optimal tilt angles. Made from high-grade galvanized steel with corrosion-resistant coating, these structures ensure long-term durability and stability. Features include easy installation, adjustable tilt angles from 10° to 30°, and compatibility with all major solar panel brands. Perfect for residential and commercial applications with standard roof types including RCC, metal sheets, and asbestos.",
+    description: "Our pre-engineered standard rooftop mounting structures are designed for efficient solar installations with optimal tilt angles. Made from high-grade galvanized steel with corrosion-resistant coating, these structures ensure long-term durability and stability. Features include easy installation, adjustable tilt angles from 10° to 30°, and compatibility with all major solar panel brands. Perfect for residential and commercial applications with standard RCC roof types.",
     category: "Solar Structures",
     image: rooftopStandard
   },
   {
     id: "rooftop-elevated",
     title: "Roof Top Structure - Elevated",
-    description: "Elevated mounting systems specifically designed for flat roofs to achieve optimal panel orientation and maximum energy generation. These structures provide sufficient clearance for maintenance access and improved air circulation beneath panels. Constructed from hot-dip galvanized steel with powder coating for enhanced weather resistance. The modular design allows for easy expansion and accommodates various load capacities. Ideal for commercial buildings, factories, and institutions with flat roof surfaces.",
+    description: "Elevated mounting systems specifically designed for flat roofs to achieve optimal panel orientation and maximum energy generation. These structures provide sufficient clearance for maintenance access and improved air circulation beneath panels. Constructed from hot-dip galvanized steel for enhanced weather resistance. The modular design allows for easy expansion and accommodates various load capacities. Ideal for commercial buildings, factories, and institutions with flat roof surfaces.",
     category: "Solar Structures",
     image: rooftopElevated
   },
@@ -45,7 +45,7 @@ const products = [
   {
     id: "ground-mount",
     title: "Ground Mount Structure",
-    description: "Heavy-duty ground mounting systems engineered for solar farms and open field installations. These robust structures feature deep foundation options including concrete piers, helical piles, and ground screws suitable for various soil conditions. The adjustable tilt and azimuth mechanisms allow for seasonal optimization of solar panel orientation. Designed to withstand extreme weather conditions with wind speeds up to 150 km/h. Complete with anti-corrosion treatment and available in fixed, seasonal adjustable, and tracking configurations.",
+    description: "Heavy-duty ground mounting systems engineered for solar farms and open field installations. These robust structures feature deep foundation options including concrete piers, helical piles, and ground screws suitable for various soil conditions. Designed to withstand extreme weather conditions with wind speeds up to 150 km/h. Complete with anti-corrosion treatment.",
     category: "Solar Structures",
     image: groundMount
   },
@@ -73,7 +73,7 @@ const products = [
   {
     id: "cable-ladder",
     title: "Cable Tray - Ladder Type",
-    description: "Heavy-duty ladder-type cable trays engineered for high-capacity power and data cable routing in industrial applications. Constructed from hot-dip galvanized steel with welded rungs for maximum strength and durability. The open design provides excellent cable visibility, ventilation, and accessibility for maintenance. Features include integrated grounding provisions, fire-resistant properties, and compatibility with various accessories like covers, dividers, and mounting brackets. Ideal for data centers, power plants, manufacturing facilities, and commercial buildings requiring robust cable management solutions.",
+    description: "Heavy-duty ladder-type cable trays engineered for high-capacity power and data cable routing in industrial applications. Constructed from galvanized steel with welded rungs for maximum strength and durability. The open design provides excellent cable visibility, ventilation, and accessibility for maintenance. Features include integrated grounding provisions, fire-resistant properties, and compatibility with various accessories like covers, dividers, and mounting brackets. Ideal for data centers, power plants, manufacturing facilities, and commercial buildings requiring robust cable management solutions.",
     category: "Cable Management",
     image: cableLadder
   },
@@ -94,7 +94,7 @@ const products = [
   {
     id: "clamps",
     title: "Solar Mounting Clamps",
-    description: "Precision-engineered aluminum and stainless steel clamps for secure solar panel mounting on all types of structures. Our comprehensive range includes mid clamps, end clams, corner clamps, and specialized clamps for frameless panels. Manufactured from high-grade aluminum alloy 6005-T5 with anodized finish or stainless steel 304/316 for coastal applications. Features include integrated rubber padding to prevent panel damage, self-locking mechanisms, and compatibility with various rail systems. Each clamp undergoes rigorous testing for pull-out strength, wind load resistance, and long-term durability in extreme weather conditions.",
+    description: "Precision-engineered aluminum clamps for secure solar panel mounting on all types of structures. Our comprehensive range includes mid clamps, end clams, corner clamps, and specialized clamps for frameless panels. Manufactured from high-grade aluminum alloy 6005-T5 with anodized finish for coastal applications. Features include integrated rubber padding to prevent panel damage, self-locking mechanisms, and compatibility with various rail systems. Each clamp undergoes rigorous testing for pull-out strength, wind load resistance, and long-term durability in extreme weather conditions.",
     category: "Accessories",
     image: clamps
   },

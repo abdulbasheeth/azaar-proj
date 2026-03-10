@@ -64,7 +64,7 @@ const Contact = () => {
 
     setIsSubmitting(true);
 
-    const whatsappNumber = "918525999646"; // WhatsApp number without '+'
+    const whatsappNumber = "919791779905n"; // WhatsApp number without '+'
 
     // Create message with proper line breaks
     const text = `Hello! I am ${formData.name}.

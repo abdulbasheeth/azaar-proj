@@ -2,7 +2,7 @@ import React from "react";
 import { FaWhatsapp } from "react-icons/fa";
 
 const WhatsAppFloat = () => {
-  const phoneNumber = "+971563150215";
+  const phoneNumber = "+919791779905";
   const message = "Hi there!";
   const url = `https://api.whatsapp.com/send?phone=${phoneNumber}&text=${encodeURIComponent(message)}`;
 

@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate, useLocation } from "react-router-dom";
 import { getHomeData } from "../../api";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { Shield, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 
 // Import images
@@ -12,14 +12,10 @@ import homeimg4 from "../../assets/homeimg4.jpg";
 import homeimg5 from "../../assets/homeimg5.jpg";
 import homeimg6 from "../../assets/homeimg6.jpg";
 
-// Import 3D Gear
-import GearModel3D from "../Ui/GearModel3D";
-
 const Home = () => {
   const [data, setData] = useState(null);
   const [loading, setLoading] = useState(true);
   const [currentImage, setCurrentImage] = useState(0);
-  const [previousImage, setPreviousImage] = useState(null);
   const [isMobile, setIsMobile] = useState(false);
 
   const navigate = useNavigate();
@@ -27,6 +23,29 @@ const Home = () => {
 
   // Image array
   const images = [homeimg1, homeimg4, homeimg2, homeimg3, homeimg5, homeimg6];
+
+  // Animation Variants
+  const containerVariants = {
+    hidden: { opacity: 0 },
+    visible: {
+      opacity: 1,
+      transition: {
+        staggerChildren: 0.2, // Delay between children animations
+        delayChildren: 0.3,  // Initial delay
+      },
+    },
+  };
+
+  const itemVariants = {
+    hidden: { opacity: 0, y: 30 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } },
+  };
+
+  const slideVariants = {
+    enter: { opacity: 0, scale: 1.1 },
+    center: { opacity: 1, scale: 1, transition: { duration: 1.2, ease: "easeOut" } },
+    exit: { opacity: 0, scale: 0.95, transition: { duration: 1, ease: "easeIn" } },
+  };
 
   // Check if mobile
   useEffect(() => {
@@ -47,22 +66,14 @@ const Home = () => {
   // Background slideshow
   useEffect(() => {
     const interval = setInterval(() => {
-      setPreviousImage(currentImage);
       setCurrentImage((prev) => (prev + 1) % images.length);
-    }, 4000);
+    }, 5000); // Increased slightly to account for animation time
     return () => clearInterval(interval);
-  }, [currentImage, images.length]);
+  }, [images.length]);
 
   // Manual Navigation Functions
-  const goToNext = () => {
-    setPreviousImage(currentImage);
-    setCurrentImage((prev) => (prev + 1) % images.length);
-  };
-
-  const goToPrev = () => {
-    setPreviousImage(currentImage);
-    setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
-  };
+  const goToNext = () => setCurrentImage((prev) => (prev + 1) % images.length);
+  const goToPrev = () => setCurrentImage((prev) => (prev - 1 + images.length) % images.length);
 
   // Scroll helpers
   const scrollToSection = (id) => {
@@ -88,26 +99,24 @@ const Home = () => {
 
   return (
     <div className="relative w-full min-h-screen h-auto lg:h-screen" id="Home">
-      {/* Background slideshow */}
+      {/* Background slideshow with AnimatePresence */}
       <div className="absolute inset-0 overflow-hidden">
-        {images.map((image, index) => (
-          <div
-            key={index}
-            className={`absolute inset-0 transition-opacity duration-1000 ease-in-out ${
-              index === currentImage
-                ? "opacity-100 z-10"
-                : index === previousImage
-                ? "opacity-0 z-0"
-                : "opacity-0 z-0"
-            }`}
+        <AnimatePresence initial={false}>
+          <motion.div
+            key={currentImage}
+            variants={slideVariants}
+            initial="enter"
+            animate="center"
+            exit="exit"
+            className="absolute inset-0"
           >
             <img
-              src={image}
+              src={images[currentImage]}
               className="w-full h-full object-cover"
-              alt={`Home Background ${index + 1}`}
+              alt={`Home Background ${currentImage + 1}`}
             />
-          </div>
-        ))}
+          </motion.div>
+        </AnimatePresence>
         <div className="absolute inset-0 bg-gradient-to-b from-black/10 via-transparent to-black/10 z-20" />
       </div>
 
@@ -118,100 +127,97 @@ const Home = () => {
       {!isMobile && (
         <div className="absolute inset-y-0 left-0 right-0 z-50 flex justify-between items-center px-4 sm:px-2 pointer-events-none">
           {/* Left Arrow */}
-          <button
+          <motion.button
             onClick={goToPrev}
-            className="p-2 sm:p-3 bg-black/30 backdrop-blur-sm rounded-full text-white hover:bg-[#3399FF]/80 transition-all pointer-events-auto"
+            whileHover={{ scale: 1.1, backgroundColor: "rgba(51, 153, 255, 0.8)" }}
+            whileTap={{ scale: 0.9 }}
+            className="p-2 sm:p-3 bg-black/30 backdrop-blur-sm rounded-full text-white transition-colors pointer-events-auto"
             aria-label="Previous Image"
           >
             <ChevronLeft className="w-6 h-6 sm:w-8 sm:h-8" />
-          </button>
+          </motion.button>
 
           {/* Right Arrow */}
-          <button
+          <motion.button
             onClick={goToNext}
-            className="p-2 sm:p-3 bg-black/30 backdrop-blur-sm rounded-full text-white hover:bg-[#3399FF]/80 transition-all pointer-events-auto"
+            whileHover={{ scale: 1.1, backgroundColor: "rgba(51, 153, 255, 0.8)" }}
+            whileTap={{ scale: 0.9 }}
+            className="p-2 sm:p-3 bg-black/30 backdrop-blur-sm rounded-full text-white transition-colors pointer-events-auto"
             aria-label="Next Image"
           >
             <ChevronRight className="w-6 h-6 sm:w-8 sm:h-8" />
-          </button>
+          </motion.button>
         </div>
       )}
 
-      {/* Main content - Added padding to left (pl-20) and right (pr-10) to clear arrows if needed on desktop */}
+      {/* Main content */}
       <div className="relative pt-20 lg:pt-30 px-4 sm:px-6 lg:pl-22 lg:pr-10 z-[40] 
                      flex flex-col lg:flex-row lg:items-start lg:justify-between gap-6 lg:gap-10 
                      min-h-screen lg:min-h-0">
         
-        {/* Left Content */}
+        {/* Left Content - Added Stagger Animation */}
         <motion.div
           className="flex-1 max-w-2xl lg:max-w-xl mt-8 lg:mt-0"
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
+          variants={containerVariants}
+          initial="hidden"
+          animate="visible"
         >
-          <div className="border border-white p-2 rounded-3xl backdrop-blur-sm px-4 sm:px-5 text-white inline-block">
+          <motion.div 
+            variants={itemVariants}
+            className="border border-white p-2 rounded-3xl backdrop-blur-sm px-4 sm:px-5 text-white inline-block"
+          >
             <div className="flex gap-3 items-center justify-center text-center">
               <Shield className="w-5 h-5 text-[#3399FF]" />
               <p className="text-sm sm:text-base">ISO 9001:2015 Certified</p>
             </div>
-          </div>
+          </motion.div>
 
-          <h1 className="text-white text-3xl sm:text-4xl md:text-5xl font-serif mt-6 lg:mt-7">
+          <motion.h1 
+            variants={itemVariants}
+            className="text-white text-3xl sm:text-4xl md:text-5xl font-serif mt-6 lg:mt-7"
+          >
             High Quality Products <br />
             <span className="text-[#3399FF] leading-1">Delivered Precisely</span>
-          </h1>
+          </motion.h1>
           
-          <p className="text-white text-lg sm:text-xl lg:text-2xl mt-4 lg:mt-5">
+          <motion.p 
+            variants={itemVariants}
+            className="text-white text-lg sm:text-xl lg:text-2xl mt-4 lg:mt-5"
+          >
             We deliver precision-engineered, high-quality metal fabrication solutions including laser
             cutting, CNC machining, and industrial manufacturing services in Chennai, India. Trusted
             for accuracy, reliability, and on-time delivery.
-          </p>
+          </motion.p>
 
           {/* Buttons Row */}
-          <div className="flex flex-col sm:flex-row gap-4 mt-6 lg:mt-7">
-            <button
+          <motion.div 
+            variants={itemVariants}
+            className="flex flex-col sm:flex-row gap-4 mt-6 lg:mt-7"
+          >
+            <motion.button
               onClick={goToProductPage}
+              whileHover={{ scale: 1.03, boxShadow: "0px 0px 15px rgba(14, 124, 233, 0.5)" }}
+              whileTap={{ scale: 0.98 }}
               className="inline-flex items-center justify-center gap-3 bg-[#0E7CE9] text-white px-4 sm:px-5 py-3 
-                       text-lg sm:text-xl lg:text-2xl font-serif rounded-2xl hover:backdrop-blur-sm group 
-                       flex-shrink-0"
+                       text-lg sm:text-xl lg:text-2xl font-serif rounded-2xl group flex-shrink-0"
             >
               <span>Explore Our Products</span>
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1 flex-shrink-0" />
-            </button>
+            </motion.button>
 
-            <button
+            <motion.button
               onClick={scrollToServices}
+              whileHover={{ scale: 1.03, backgroundColor: "rgba(255, 255, 255, 0.25)" }}
+              whileTap={{ scale: 0.98 }}
               className="inline-flex items-center justify-center gap-3 text-white px-4 sm:px-5 py-3 
                        text-lg sm:text-xl lg:text-2xl font-serif rounded-2xl
-                       bg-white/10 backdrop-blur-sm border border-white/20 hover:bg-white/20 
-                       transition-colors group flex-shrink-0"
+                       bg-white/10 backdrop-blur-sm border border-white/20 transition-colors group flex-shrink-0"
             >
               <span>Explore Our Services</span>
               <ArrowRight className="w-5 h-5 transition-transform group-hover:translate-x-1 flex-shrink-0" />
-            </button>
-          </div>
-        </motion.div>
-
-        {/* Right 3D Gear - hidden on mobile */}
-        {!isMobile && (
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8 }}
-            className="flex-1 w-full lg:w-[500px] h-[300px] lg:h-[500px] max-w-full lg:max-w-[500px] 
-                      max-h-[300px] lg:max-h-[420px] relative lg:mr-16 mt-8 lg:mt-0"
-          >
-            <div className="absolute inset-0 bg-gradient-radial from-industrial-blue/20 via-transparent to-transparent rounded-full blur-3xl" />
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              className="w-full h-full"
-            >
-              <GearModel3D />
-            </motion.div>
+            </motion.button>
           </motion.div>
-        )}
+        </motion.div>
       </div>
     </div>
   );
